@@ -1,2 +1,5 @@
 # MaX Pondus
-A simple weight training journal.
+Ever dreamed to have maximum performance with maximum weights?
+
+Worry no more, MaX Pondus is here!
+
