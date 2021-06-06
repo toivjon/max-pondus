@@ -24,14 +24,14 @@ echo    Go version      %goversion%
 
 :: Remove the old build directory to ensure that we get a clean build.
 echo Removing the old build directory if it already exists
-if exist "%buildpath%" rd /s /q "%buildpath%"
+if exist "%buildpath%" rd /s /q "%buildpath%" || exit /B 1
 
 :: Gather and compile the backend sources files into an executable.
 echo Compiling the source files into an executable.
 set compilationstart=%time%
 mkdir %buildpath%
 cd %buildpath%
-go build -race %cmdpath% || exit / B 1
+go build -race %cmdpath% || exit /B 1
 set compilationend=%time%
 
 :: Resolve the path of the created executable.
