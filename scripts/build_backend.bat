@@ -31,7 +31,7 @@ echo Compiling the source files into an executable.
 set compilationstart=%time%
 mkdir %buildpath%
 cd %buildpath%
-go build -race %cmdpath% || exit
+go build -race %cmdpath% || exit / B 1
 set compilationend=%time%
 
 :: Resolve the path of the created executable.
