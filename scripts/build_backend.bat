@@ -42,3 +42,4 @@ echo Compilation statistics
 echo    Executable      %executablepath%
 echo    Start time      %compilationstart%
 echo    End time        %compilationend%
+echo Build completed.
