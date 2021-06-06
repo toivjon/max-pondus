@@ -28,6 +28,17 @@ if exist "%buildpath%" rd /s /q "%buildpath%"
 
 :: Gather and compile the backend sources files into an executable.
 echo Compiling the source files into an executable.
+set compilationstart=%time%
 mkdir %buildpath%
 cd %buildpath%
-go build -race %cmdpath%
+go build -race %cmdpath% || exit
+set compilationend=%time%
+
+:: Resolve the path of the created executable.
+set executablepath=%buildpath%\backend.exe
+
+:: Show information related to compilation.
+echo Compilation statistics
+echo    Executable      %executablepath%
+echo    Start time      %compilationstart%
+echo    End time        %compilationend%
