@@ -1,0 +1,2 @@
+# Exclude the default binaries folder which is automatically created by the scripts.
+/bin
