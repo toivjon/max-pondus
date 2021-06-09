@@ -38,7 +38,7 @@ set compilationend=%time%
 set executablepath=%buildpath%\backend.exe
 
 :: Show information related to compilation.
-echo Compilation statistics
+echo Compilation completed:
 echo    Executable      %executablepath%
 echo    Start time      %compilationstart%
 echo    End time        %compilationend%
