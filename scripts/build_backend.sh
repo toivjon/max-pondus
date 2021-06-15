@@ -23,6 +23,9 @@ printf "\tBuild path\t $BUILDPATH\n"
 printf "\tCmd path\t $CMDPATH\n"        
 printf "\tGo version\t $GOVERSION\n"
 
+printf "Running tests...\n"
+go test -v ./internal/...
+
 # Remove the old build directory to ensure that we get a clean build.
 printf "Removing the old build directory if it already exists\n"
 [ -d $BUILDPATH ] && rm -rf $BUILDPATH
