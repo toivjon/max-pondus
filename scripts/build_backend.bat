@@ -27,9 +27,9 @@ echo    Build path      %buildpath%
 echo    Cmd path        %cmdpath%
 echo    Go version      %goversion%
 
-:: ------------------------------
-:: Source code format validation.
-:: ------------------------------
+:: -----------------------------
+:: Source code format validation
+:: -----------------------------
 
 :: Install the goimports if not yet installed.
 if not exist %GOPATH%\bin\goimports.exe (
@@ -47,6 +47,17 @@ if %formatok% == 0 (
   exit /B 1
 )
 echo Validating code formatting passed.
+
+:: ---------
+:: Run tests
+:: ---------
+
+echo Running tests...
+go test -v -failfast -race ./internal/... || (
+  echo Running tests failed.
+  exit /B 1
+)
+echo Running tests passed.
 
 :: Remove the old build directory to ensure that we get a clean build.
 echo Removing the old build directory if it already exists
