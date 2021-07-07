@@ -48,16 +48,24 @@ if %formatok% == 0 (
 )
 echo Validating code formatting passed.
 
-:: ---------
-:: Run tests
-:: ---------
+:: ----------------------------
+:: Run tests and check coverage
+:: ----------------------------
 
-echo Running tests...
-go test -v -failfast -race ./internal/... || (
+set coveragethreshold=95.0%
+echo Running tests and checking test coverage (threshold: %coveragethreshold%)...
+go test -v -failfast -race -coverprofile coverage.out ./internal/... || (
   echo Running tests failed.
   exit /B 1
 )
-echo Running tests passed.
+set coverage=0.0%
+for /f "tokens=3" %%i in ('go tool cover -func ./coverage.out') do set coverage=%%i
+call :percentage_string_gte %coverage% %coveragethreshold% coveragepassed
+if %coveragepassed% equ 0 (
+  echo Checking test coverage failed. Test coverage is too low.
+  exit /B 1
+)
+echo Running tests and checking coverage (threshold: %coveragethreshold%) passed.
 
 :: Remove the old build directory to ensure that we get a clean build.
 echo Removing the old build directory if it already exists
@@ -80,3 +88,20 @@ echo    Executable      %executablepath%
 echo    Start time      %compilationstart%
 echo    End time        %compilationend%
 echo Build completed.
+exit /B 0
+
+:: Compare two percentage strings by checking whether the lhs is greater or equal than rhs. Both
+:: strings must be in a numeric string format with one decimal number and with a percentage suffix.
+:percentage_string_gte
+set lhs=%~1
+set rhs=%~2
+set lhs_decimal=%lhs:~-1%
+set rhs_decimal=%rhs:~-1%
+set lhs=%lhs:~0,-2%
+set rhs=%rhs:~0,-2%
+set lhs=%lhs%%lhs_decimal%
+set rhs=%rhs%%rhs_decimal%
+set /a lhs=%lhs%
+set /a rhs=%rhs%
+if %lhs% geq %rhs% ( set %~3=1 ) else ( set %~3=0 )
+exit /B 0

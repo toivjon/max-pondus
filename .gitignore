@@ -3,3 +3,6 @@
 
 # Exclude the Visual Studio Code user specific project settings folder.
 /.vscode
+
+# Exclude coverage results from the repository.
+coverage.out
