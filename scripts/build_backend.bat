@@ -67,6 +67,10 @@ if %coveragepassed% equ 0 (
 )
 echo Running tests and checking coverage (threshold: %coveragethreshold%) passed.
 
+:: ----------------------------------
+:: Compile the application executable
+:: ----------------------------------
+
 :: Remove the old build directory to ensure that we get a clean build.
 echo Removing the old build directory if it already exists
 if exist "%buildpath%" rd /s /q "%buildpath%" || exit /B 1

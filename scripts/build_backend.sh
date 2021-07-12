@@ -21,13 +21,31 @@ CMDPATH="$ROOTPATH/cmd/backend"
 
 # Show the information related to compilation environment.
 printf "Detected environment information\n"
-printf "\tProject root\t $ROOTPATH\n"
-printf "\tBuild path\t $BUILDPATH\n"      
-printf "\tCmd path\t $CMDPATH\n"        
-printf "\tGo version\t $GOVERSION\n"
+printf "  Project root    $ROOTPATH\n"
+printf "  Build path      $BUILDPATH\n"      
+printf "  Cmd path        $CMDPATH\n"        
+printf "  Go version      $GOVERSION\n"
 
+# -----------------------------
+# Source code format validation
+# -----------------------------
+
+# Install the goimports if not yet installed.
+# TODO
+
+# Use goimports to check the format correctness.
+# TODO
+
+# ----------------------------
+# Run tests and check coverage
+# ----------------------------
+# TODO
 printf "Running tests...\n"
 go test -v ./internal/...
+
+# ----------------------------------
+# Compile the application executable
+# ----------------------------------
 
 # Remove the old build directory to ensure that we get a clean build.
 printf "Removing the old build directory if it already exists\n"
