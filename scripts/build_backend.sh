@@ -3,6 +3,9 @@
 set -euo pipefail
 printf "Building MaX Pondus backend\n"
 
+# Make Go to install necessary packages globally.
+set GO111MODULE=off
+
 # Resolve the absolute path of the project root form the script path.
 ROOTPATH=$(dirname $(readlink -f $0))
 ROOTPATH=$(dirname $ROOTPATH)
