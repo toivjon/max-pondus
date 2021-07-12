@@ -26,6 +26,7 @@ echo    Project root    %rootpath%
 echo    Build path      %buildpath%
 echo    Cmd path        %cmdpath%
 echo    Go version      %goversion%
+echo    Go path         %GOPATH%
 
 :: -----------------------------
 :: Source code format validation

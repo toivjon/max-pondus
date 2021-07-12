@@ -19,18 +19,23 @@ BUILDPATH="$ROOTPATH/bin/backend"
 # Resolve the folder which contains the main of the application.
 CMDPATH="$ROOTPATH/cmd/backend"
 
+# Resolve the place where Go stores globally installed apps.
+GOPATH=$(go env GOPATH)
+
 # Show the information related to compilation environment.
 printf "Detected environment information\n"
 printf "  Project root    $ROOTPATH\n"
 printf "  Build path      $BUILDPATH\n"      
 printf "  Cmd path        $CMDPATH\n"        
 printf "  Go version      $GOVERSION\n"
+printf "  Go path         $GOPATH\n"
 
 # -----------------------------
 # Source code format validation
 # -----------------------------
 
 # Install the goimports if not yet installed.
+# if [ -e $ ]
 # TODO
 
 # Use goimports to check the format correctness.
