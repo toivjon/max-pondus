@@ -4,7 +4,7 @@ set -euo pipefail
 printf "Building MaX Pondus backend\n"
 
 # Make Go to install necessary packages globally.
-set GO111MODULE=off
+export GO111MODULE=off
 
 # Resolve the absolute path of the project root form the script path.
 ROOTPATH=$(dirname $(readlink -f $0))
@@ -19,7 +19,7 @@ BUILDPATH="$ROOTPATH/bin/backend"
 # Resolve the folder which contains the main of the application.
 CMDPATH="$ROOTPATH/cmd/backend"
 
-# Resolve the place where Go stores globally installed apps.
+# Resolve the place where Go has been installed.
 GOPATH=$(go env GOPATH)
 
 # Show the information related to compilation environment.
@@ -35,8 +35,12 @@ printf "  Go path         $GOPATH\n"
 # -----------------------------
 
 # Install the goimports if not yet installed.
-# if [ -e $ ]
-# TODO
+if [ ! -e $GOPATH/bin/goimports ]
+then
+    printf "Installing goimports...\n"
+    go get golang.org/x/tools/cmd/goimports
+    printf "Installing goimports completed.\n"
+fi
 
 # Use goimports to check the format correctness.
 # TODO
