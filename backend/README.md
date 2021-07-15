@@ -9,10 +9,10 @@ Windows users should note that the build script uses goimports which needs the d
 
 ### Windows
 ```console
-./scripts/build_backend.bat
+./scripts/build.bat
 ```
 
 ### Unix/Linux
 ```console
-./scripts/build_backend.sh
+./scripts/build.sh
 ```
