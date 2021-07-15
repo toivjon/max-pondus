@@ -6,3 +6,6 @@
 
 # Exclude coverage results from the repository.
 coverage.out
+
+# Exlude linter results from the repository.
+lint.out

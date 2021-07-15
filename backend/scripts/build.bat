@@ -41,9 +41,11 @@ if not exist %GOPATH%\bin\goimports.exe (
 
 :: Use goimports to check the format correctness.
 echo Validating code formatting...
-set formatok=1
-for /f "skip=1 delims=" %%i in ('goimports -e -d ./') do (echo %%i && set formatok=0)
-if %formatok% == 0 (
+set lintresult=%rootpath%\lint.out
+goimports -e -d ./ > %lintresult% || exit /B 1
+findstr /m "+++" %lintresult% >nul
+if %errorlevel% neq 1 (
+  type %lintresult%
   echo Validating code formatting failed.
   exit /B 1
 )
