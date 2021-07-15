@@ -3,8 +3,17 @@ Ever dreamed to have maximum performance with maximum weights?
 
 Worry no more, MaX Pondus is here!
 
-# Building Backend
+## Building Backend
 The build scripts for the backend can be found from the scripts folder.
 
 Windows users should note that the build script uses goimports which needs the diff to be present in the $PATH.
 
+### Windows
+```console
+./scripts/build_backend.bat
+```
+
+### Unix/Linux
+```console
+./scripts/build_backend.sh
+```
