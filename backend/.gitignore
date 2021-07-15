@@ -1,11 +1,11 @@
-# Exclude the default binaries folder which is automatically created by the scripts.
+# Default binaries folder which is automatically created by the scripts.
 /bin
 
-# Exclude the Visual Studio Code user specific project settings folder.
+# Visual Studio Code user specific project settings.
 /.vscode
 
-# Exclude coverage results from the repository.
+# Go test coverage results.
 coverage.out
 
-# Exlude linter results from the repository.
+# Go linter results.
 lint.out
