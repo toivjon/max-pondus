@@ -1,24 +1,11 @@
 {
   "name": "max-pondus-frontend",
-  "version": "1.0.0",
   "description": "A frontend for the MaX Pondus service.",
-  "main": "index.js",
-  "private": true,
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/toivjon/max-pondus.git",
-    "directory": "frontend"
-  },
-  "keywords": [
-    "frontend"
-  ],
+  "version": "1.0.0",
   "author": "toivjon",
   "license": "UNLICENSED",
-  "bugs": {
-    "url": "https://github.com/toivjon/max-pondus/issues"
-  },
-  "homepage": "https://github.com/toivjon/max-pondus#readme"
+  "private": true,
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {}
 }
