@@ -23,7 +23,9 @@ module.exports = {
   devServer: {
     host: "localhost",
     port: 3000,
-    watchContentBase: true
+    watchContentBase: true,
+    open: true,
+    hotOnly: true
   },
   plugins: [
     new HtmlWebPackPlugin({
