@@ -1,4 +1,4 @@
-# Max Pondus - Backend
+# MaX Pondus - Backend
 
 The backend for the MaX Pondus weight training journal.
 
