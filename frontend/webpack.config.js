@@ -6,6 +6,7 @@ module.exports = {
   entry: "./src/index.js",
   output: {
     filename: "bundle.[fullhash].js",
+    path: path.resolve(__dirname, 'dist'),
   },
   module: {
     rules: [
