@@ -1,6 +1,6 @@
 # Max Pondus - Backend
 
-The backend for the Max Pondus weight training journal.
+The backend for the MaX Pondus weight training journal.
 
 ## Build
 The build scripts can be found from the scripts folder.
