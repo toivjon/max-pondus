@@ -7,3 +7,20 @@ Worry no more, MaX Pondus is here!
 This monorepo is split into backend and frontend projects.
 
 Both projects and their usage instructions can be found under the corresponding folders.
+
+## TODO
+This section contains a list of features waiting for implementation.
+
+- Muscle catalog.
+- Exercise catalog.
+- Personal plans.
+- Personal history.
+- Personal progress.
+- Support to correct old results.
+- Clock.
+- Notes per exercise.
+- Show related muscles per exercise.
+- Wild feature: Exercise experience points.
+- Wild feature: Exercise scalaer based on the hardness.
+- Wild feature: Challenge weeks.
+- Wild feature: Automatical suggestion to raise weights when progressed enough.
