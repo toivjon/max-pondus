@@ -8,7 +8,8 @@
   "scripts": {
     "start": "webpack serve --mode development",
     "build": "webpack build --mode production",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "lint": "eslint src/**"
   },
   "dependencies": {
     "react": "^17.0.2",
