@@ -17,3 +17,5 @@ Run the unit tests by running the npm _test_ script.
 ```console
 npm run test
 ```
+
+Script will also check test coverage and output coverage report into the _coverage_ folder.
