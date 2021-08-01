@@ -8,7 +8,7 @@
   "scripts": {
     "start": "webpack serve --mode development",
     "build": "webpack build --mode production",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "dependencies": {
     "react": "^17.0.2",
@@ -32,6 +32,14 @@
   "jest": {
     "moduleNameMapper": {
       "\\.(css)$": "<rootDir>/__mocks__/styles.js"
+    },
+    "coverageThreshold": {
+      "global": {
+        "branches": 95,
+        "functions": 95,
+        "lines": 95,
+        "statements": 95
+      }
     }
   }
 }

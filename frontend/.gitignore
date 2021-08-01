@@ -3,3 +3,6 @@
 
 # Build results.
 /dist
+
+# Jest test coverage results.
+/coverage
