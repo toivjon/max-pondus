@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-// Handler represents a service handling health status requests.
+// Handler represents a service handling health API requests.
 type Handler struct{}
 
 // ServeHTTP will handle the request passed to health API.
