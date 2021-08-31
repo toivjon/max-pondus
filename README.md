@@ -11,7 +11,7 @@ Both projects and their usage instructions can be found under the corresponding 
 ## Entities
 This section contains the list and description about the entities within the application.
 
-TODO
+![alt text](https://github.com/toivjon/max-pondus/blob/main/documentation/entities.png "Entities")
 
 ## TODO
 This section contains a list of features waiting for implementation.
