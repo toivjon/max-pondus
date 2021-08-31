@@ -9,7 +9,7 @@ This monorepo is split into backend and frontend projects.
 Both projects and their usage instructions can be found under the corresponding folders.
 
 ## Entities
-This section contains the list and description about the entities within the application.
+This section contains information about the application entities and their relationships.
 
 ![alt text](https://github.com/toivjon/max-pondus/blob/main/documentation/entities.png "Entities")
 
