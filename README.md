@@ -8,6 +8,11 @@ This monorepo is split into backend and frontend projects.
 
 Both projects and their usage instructions can be found under the corresponding folders.
 
+## Entities
+This section contains the list and description about the entities within the application.
+
+TODO
+
 ## TODO
 This section contains a list of features waiting for implementation.
 
