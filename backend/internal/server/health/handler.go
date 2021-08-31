@@ -8,7 +8,7 @@ import (
 // Handler represents a service handling health API requests.
 type Handler struct{}
 
-// ServeHTTP will handle the request passed to health API.
+// ServeHTTP will handle requests passed to health API.
 func (h *Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Hello health!")
 }
