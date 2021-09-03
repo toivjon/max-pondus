@@ -22,6 +22,8 @@ This section contains a list of features waiting for implementation.
 - Personal history.
 - Personal progress.
 - A support to correct old results.
+- A support for supersets.
+- A support for drop sets.
 - Clock.
 - Notes per workout.
 - Show related muscles per exercise.
