@@ -18,14 +18,14 @@ This section contains a list of features waiting for implementation.
 
 - Muscle catalog.
 - Exercise catalog.
-- Personal plans.
+- Personal programs.
 - Personal history.
 - Personal progress.
-- Support to correct old results.
+- A support to correct old results.
 - Clock.
-- Notes per exercise.
+- Notes per workout.
 - Show related muscles per exercise.
 - Wild feature: Exercise experience points.
-- Wild feature: Exercise scalaer based on the hardness.
+- Wild feature: Exercise scalar based on the hardness.
 - Wild feature: Challenge weeks.
 - Wild feature: Automatical suggestion to raise weights when progressed enough.
