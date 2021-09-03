@@ -16,3 +16,8 @@ Windows users should note that the build script uses goimports which needs the d
 ```console
 ./scripts/build.sh
 ```
+
+## REST API
+This section contains the list of backend REST API end points.
+
+TODO
