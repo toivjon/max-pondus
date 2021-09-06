@@ -14,7 +14,7 @@ This section contains information about the application entities and their relat
 ![alt text](https://github.com/toivjon/max-pondus/blob/main/documentation/entities.png "Entities")
 
 ## Schema
-This section contains information about the application database scehema.
+This section contains information about the application database schema.
 
 TODO
 
