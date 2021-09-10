@@ -11,7 +11,7 @@ Both projects and their usage instructions can be found under the corresponding 
 ## Features
 This section contains an abstract list of the service features.
 
-Note that currently all features are still TODOs as the application is currently under brainstorming.
+**NOTE**: Project is currently under biiiiiig brainstorming so all features are currently TODO.
 
 ### User Management
 - Authentication uses a simple HTTP Basic authentication.
