@@ -9,11 +9,15 @@ This monorepo is split into backend and frontend projects.
 Both projects and their usage instructions can be found under the corresponding folders.
 
 ## Features
-This section contains the list of the service features.
+This section contains an abstract list of the service features.
 
 Note that currently all features are still TODOs as the application is currently under brainstorming.
 
-TODO
+### User Management
+- Authentication uses a simple HTTP Basic authentication.
+- User roles are split into a normal and administrator roles.
+- Administrators may add new users and modify or delete existing users.
+- Administrators may also act as normal users.
 
 
 ## Entities
