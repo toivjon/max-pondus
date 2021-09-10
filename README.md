@@ -11,7 +11,7 @@ Both projects and their usage instructions can be found under the corresponding 
 ## Features
 This section contains the list of the service features.
 
-Note that currently all features are still TODOs as the application is currently in design phase.
+Note that currently all features are still TODOs as the application is currently under brainstorming.
 
 TODO
 
