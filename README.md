@@ -8,6 +8,14 @@ This monorepo is split into backend and frontend projects.
 
 Both projects and their usage instructions can be found under the corresponding folders.
 
+## Features
+This section contains the list of the service features.
+
+Note that currently all features are still TODOs as the application is currently in design phase.
+
+TODO
+
+
 ## Entities
 This section contains information about the application entities and their relationships.
 
