@@ -19,6 +19,19 @@ Note that currently all features are still TODOs as the application is currently
 - Administrators may add new users and modify or delete existing users.
 - Administrators may also act as normal users.
 
+### Exercises
+- Mechanics can be classified into isolated and compound exercises.
+- Exercises contain at least name and instructions.
+- Exercises may contain additional links e.g. links to videos or additional information.
+- Exercises may contain a list of the target and synergist muscles.
+- Muscle and muscle group catalog is provided by the service.
+- Administrators may add new exercises and modify or delete existing exercises.
+
+### Workouts
+TODO
+
+### Programs
+TODO
 
 ## Entities
 This section contains information about the application entities and their relationships.
@@ -33,8 +46,6 @@ TODO
 ## TODO
 This section contains a list of features waiting for implementation.
 
-- Muscle catalog.
-- Exercise catalog.
 - Personal programs.
 - Personal history.
 - Personal progress.
@@ -43,8 +54,14 @@ This section contains a list of features waiting for implementation.
 - A support for drop sets.
 - Clock.
 - Notes per workout.
-- Show related muscles per exercise.
 - Wild feature: Exercise experience points.
 - Wild feature: Exercise scalar based on the hardness.
 - Wild feature: Challenge weeks.
 - Wild feature: Automatical suggestion to raise weights when progressed enough.
+- Workout notes
+- Workout start and end times
+- Workout set start and end times
+- Workout set notes
+- Rest duration between sets.
+- Supersets
+- Drop sets
