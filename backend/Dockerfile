@@ -1,9 +1,6 @@
 # syntax=docker/dockerfile:1
 FROM golang:1.17.1-alpine
 
-# Tell Docker about the port used by the application.
-EXPOSE 8080
-
 # Create a directory for the application.
 WORKDIR /maxpondus
 
@@ -17,3 +14,6 @@ RUN go build -o /bin/mxp ./cmd/server
 
 # Run the application.
 CMD ["/bin/mxp"]
+
+# Tell Docker about the port used by the application.
+EXPOSE 8080
