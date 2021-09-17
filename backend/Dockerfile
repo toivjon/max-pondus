@@ -8,11 +8,11 @@ WORKDIR /maxpondus
 COPY go.mod .
 RUN go mod download
 
-# Copy the project files and build the application.
+# Copy project files and build the application.
 COPY . .
 RUN go build -o /bin/mxp ./cmd/server
 
-# Run the application.
+# Specify the executable to run in the container.
 CMD ["/bin/mxp"]
 
 # Tell Docker about the port used by the application.
