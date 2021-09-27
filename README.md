@@ -28,7 +28,15 @@ This section contains an abstract list of the service features.
 - Administrators may add new exercises and modify or delete existing exercises.
 
 ### Workouts
-TODO
+- Users may add, modify and delete own workouts.
+- Users may add additional notes per workout.
+- Workouts can be individual or they can be part of an existing workout program.
+- Workouts may contain 1..N sets.
+- Workout set may contain 1..N exercises (e.g. supersets).
+- Workout set exercises may contain differing weights (e.g. drop sets).
+- A clock is shown at all times during the workout.
+- A simple buttons to start and stop the workout and the workout set timer are shown in the UI.
+- Workout and workout set durations are saved.
 
 ### Programs
 TODO
