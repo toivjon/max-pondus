@@ -39,7 +39,17 @@ This section contains an abstract list of the service features.
 - Workout and workout set durations are saved.
 
 ### Programs
-TODO
+- Users may add, modify and delete own programs.
+- Programs may contain additional notes.
+- Program workouts may contain additional notes.
+- Program workouts contain rest times between sets.
+- Program workouts can be individually customized (e.g. light and intense weeks etc.).
+- User may see their own program progress and history.
+
+### Wild Features
+- Users may earn experience points when achieving targets or personal records.
+- Users may participate on challenge weeks.
+- Service may automically suggest to raise weights or difficulty when progressed enough.
 
 ## Entities
 This section contains information about the application entities and their relationships.
@@ -50,26 +60,3 @@ This section contains information about the application entities and their relat
 This section contains information about the application database schema.
 
 TODO
-
-## TODO
-This section contains a list of features waiting for implementation.
-
-- Personal programs.
-- Personal history.
-- Personal progress.
-- A support to correct old results.
-- A support for supersets.
-- A support for drop sets.
-- Clock.
-- Notes per workout.
-- Wild feature: Exercise experience points.
-- Wild feature: Exercise scalar based on the hardness.
-- Wild feature: Challenge weeks.
-- Wild feature: Automatical suggestion to raise weights when progressed enough.
-- Workout notes
-- Workout start and end times
-- Workout set start and end times
-- Workout set notes
-- Rest duration between sets.
-- Supersets
-- Drop sets
