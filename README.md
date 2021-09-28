@@ -21,7 +21,7 @@ This section contains an abstract list of the service features.
 
 ### Exercises
 - Mechanics can be classified into isolated and compound exercises.
-- Exercises contain at least name and instructions.
+- Exercises contain at least name and description.
 - Exercises may contain additional links e.g. links to videos or additional information.
 - Exercises may contain a list of the target and synergist muscles.
 - Muscle and muscle group catalog is provided by the service.
