@@ -46,11 +46,6 @@ This section contains an abstract list of the service features.
 - Program workouts can be individually customized (e.g. light and intense weeks etc.).
 - User may see their own program progress and history.
 
-### Wild Features
-- Users may earn experience points when achieving targets or personal records.
-- Users may participate on challenge weeks.
-- Service may automically suggest to raise weights or difficulty when progressed enough.
-
 ## Entities
 This section contains information about the application entities and their relationships.
 
