@@ -51,19 +51,19 @@ This section contains information about the application entities and their relat
 
 ![alt text](https://github.com/toivjon/max-pondus/blob/main/documentation/entities.png "Entities")
 
-| Entity       | Description                                                                           |
-| ------------ | ------------------------------------------------------------------------------------- |
-| Exercise     | An activity which requires physical effort.                                           |
-| Link         | A link to a external source providing additional info (e.g. videos & additional info) |
-| Mechanics    | A category how an exercise handles motion and force.                                  |
-| Muscle       | A part of the body that handles the physical effort.                                  |
-| Muscle Group | A logical group of muscles in a body.                                                 |
-| Program      | A scheduled physical activity for a time period.                                      |
-| Role         | A group of application use permissions.                                               |
-| Set          | A logical group of exercise repetition sets.                                          |
-| Subset       | A set of repetitions of an exercise.                                                  |
-| User         | An identifiable application user.                                                     |
-| Workout      | A session of physical activity.                                                       |
+| Entity       | Description                                                                            |
+| ------------ | -------------------------------------------------------------------------------------- |
+| Exercise     | An activity which requires physical effort.                                            |
+| Link         | A link to a external source providing additional info (e.g. videos & additional info). |
+| Mechanics    | A category how an exercise handles motion and force.                                   |
+| Muscle       | A part of the body that handles the physical effort.                                   |
+| Muscle Group | A logical group of muscles in a body.                                                  |
+| Program      | A scheduled physical activity for a time period.                                       |
+| Role         | A group of application use permissions.                                                |
+| Set          | A logical group of exercise repetition sets.                                           |
+| Subset       | A set of repetitions of an exercise.                                                   |
+| User         | An identifiable application user.                                                      |
+| Workout      | A session of physical activity.                                                        |
 
 ## Schema
 This section contains information about the application database schema.
