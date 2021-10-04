@@ -62,8 +62,8 @@ This section contains information about the application entities and their relat
 | Role         | A group of application use permissions.                                                |
 | Set          | A logical group of exercise repetition sets.                                           |
 | Subset       | A set of repetitions of an exercise.                                                   |
-| User         | An identifiable application user.                                                      |
-| Workout      | A session of physical activity.                                                        |
+| User         | An identifiable user of the application.                                               |
+| Workout      | A single session of physical activity.                                                 |
 
 ## Schema
 This section contains information about the application database schema.
