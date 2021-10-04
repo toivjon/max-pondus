@@ -58,7 +58,7 @@ This section contains information about the application entities and their relat
 | Mechanics    | A category how an exercise handles motion and force.                                   |
 | Muscle       | A part of the body that handles the physical effort.                                   |
 | Muscle Group | A logical group of muscles in a body.                                                  |
-| Program      | A scheduled physical activity for a time period.                                       |
+| Program      | A set of scheduled physical activities for a time period.                              |
 | Role         | A group of application use permissions.                                                |
 | Set          | A logical group of exercise repetition sets.                                           |
 | Subset       | A set of repetitions of an exercise.                                                   |
