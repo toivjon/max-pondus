@@ -12,17 +12,18 @@ import (
 
 func main() {
 	port := flag.Int("port", 8080, "The port to listen for the incoming HTTP connections.")
-	timeout := flag.Int("timeout", 1, "The timeout for the request handling in seconds.")
+	timeout := flag.Duration("timeout", time.Second, "The timeout for processing the request.")
 	flag.Parse()
 
 	mux := http.NewServeMux()
 	mux.Handle("/", &server.Handler{})
 
 	server := &http.Server{
-		Addr:         fmt.Sprintf(":%d", *port),
-		WriteTimeout: time.Duration(*timeout+1) * time.Second,
-		Handler:      http.TimeoutHandler(mux, time.Duration(*timeout)*time.Second, ""),
+		Addr:              fmt.Sprintf(":%d", *port),
+		WriteTimeout:      *timeout + time.Second,
+		ReadHeaderTimeout: time.Second,
+		Handler:           http.TimeoutHandler(mux, *timeout, ""),
 	}
-	log.Printf("Starting a server at port %d with %d sec timeout", *port, *timeout)
+	log.Printf("Starting a server port: %d timeout: %v", *port, *timeout)
 	log.Fatal(server.ListenAndServe())
 }
