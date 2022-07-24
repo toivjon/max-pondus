@@ -21,6 +21,7 @@ func main() {
 	server := &http.Server{
 		Addr:              fmt.Sprintf(":%d", *port),
 		WriteTimeout:      *timeout + time.Second,
+		ReadTimeout:       time.Second,
 		ReadHeaderTimeout: time.Second,
 		Handler:           http.TimeoutHandler(mux, *timeout, ""),
 	}
