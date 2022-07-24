@@ -1,6 +1,8 @@
 package server
 
-import "net/http"
+import (
+	"net/http"
+)
 
 // Handler is the base handler for all HTTP requests.
 type Handler struct{}
