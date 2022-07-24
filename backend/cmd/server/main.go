@@ -7,7 +7,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/toivjon/max-pondus/backend/internal/server"
+	"github.com/toivjon/max-pondus/backend/internal/server/admin"
+	"github.com/toivjon/max-pondus/backend/internal/server/personal"
 )
 
 func main() {
@@ -16,7 +17,9 @@ func main() {
 	flag.Parse()
 
 	mux := http.NewServeMux()
-	mux.Handle("/", &server.Handler{})
+	mux.Handle("/api/v1/personal", personal.NewHandler())
+	mux.Handle("/api/v1/admin", admin.NewHandler())
+	mux.Handle("/", http.NotFoundHandler())
 
 	server := &http.Server{
 		// Just use the default hostname and only specify the port we want to listen.
