@@ -1,4 +1,11 @@
 package server
 
-// Handler represents a function which can handle an incoming HTTP request.
-type Handler func(*Context)
+import "net/http"
+
+// Handler is the base handler for all HTTP requests.
+type Handler struct{}
+
+func (h *Handler) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
+	// TODO Wrap response writer and request into a context.
+	rw.Write([]byte("TODO"))
+}
