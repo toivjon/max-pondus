@@ -6,6 +6,6 @@ import "net/http"
 type Handler struct{}
 
 func (h *Handler) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
-	// TODO Wrap response writer and request into a context.
-	rw.Write([]byte("TODO"))
+	ctx := Context{ResponseWriter: rw, Request: req}
+	ctx.WriteResponse(200, struct{ Text string }{Text: "TODO"})
 }
