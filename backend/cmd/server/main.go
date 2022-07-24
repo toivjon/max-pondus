@@ -19,11 +19,16 @@ func main() {
 	mux.Handle("/", &server.Handler{})
 
 	server := &http.Server{
-		Addr:              fmt.Sprintf(":%d", *port),
-		WriteTimeout:      *timeout + time.Second,
-		ReadTimeout:       time.Second,
+		// Just use the default hostname and only specify the port we want to listen.
+		Addr: fmt.Sprintf(":%d", *port),
+		// Make sure that our response writer has time to write the response when processing timeouts.
+		WriteTimeout: *timeout + time.Second,
+		// Reserve one second to read the request payload.
+		ReadTimeout: time.Second,
+		// Reserve one second to request to establish a connection and us to read the headers.
 		ReadHeaderTimeout: time.Second,
-		Handler:           http.TimeoutHandler(mux, *timeout, ""),
+		// Use timeout handler to automatically abort the request handling if the processing timeouts.
+		Handler: http.TimeoutHandler(mux, *timeout, ""),
 	}
 	log.Printf("Starting a server port: %d timeout: %v", *port, *timeout)
 	log.Fatal(server.ListenAndServe())
