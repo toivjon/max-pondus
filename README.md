@@ -57,7 +57,21 @@ This section contains an abstract list of the service features.
 
 This section contains information about the application entities and their relationships.
 
-![alt text](https://github.com/toivjon/max-pondus/blob/main/documentation/entities.png "Entities")
+```mermaid
+erDiagram
+  Role         ||--o{ User     : ""
+  User         ||--o{ Program  : ""
+  User         ||--o{ Workout  : ""
+  Program      |o--o{ Workout  : ""
+  Workout      ||--o{ Set      : ""
+  Set          ||--o{ Subset   : ""
+  Muscle-Group ||--o{ Muscle   : ""
+  Muscle       }o--o{ Exercise : "" 
+  Mechanics    ||--o{ Exercise : ""
+  Exercise     ||--o{ Link     : ""
+  Exercise     ||--o{ Subset   : ""
+  User         ||--o{ Workout  : ""
+```
 
 | Entity       | Description                                                                            |
 | ------------ | -------------------------------------------------------------------------------------- |
