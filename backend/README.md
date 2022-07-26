@@ -3,26 +3,31 @@
 The backend for the MaX Pondus weight training journal.
 
 ## Build
+
 The build scripts can be found from the scripts folder.
 
 Windows users should note that the build script uses goimports which needs the diff to be present in the $PATH.
 
 ### Windows
+
 ```console
 ./scripts/build.bat
 ```
 
 ### Unix/Linux
+
 ```console
 ./scripts/build.sh
 ```
 
 ## REST API
+
 This application introduces a REST API to access the desired features.
 
 Furthermore the REST API is split into Admin API and Personal API.
 
 ### Admin API
+
 The Admin API is used to perform administrative operations like adding new users and exercises.
 
 This API requires the user to have the ADMIN role.
@@ -43,6 +48,7 @@ Here is an overview of the available end points.
 | /admin/api/v1/exercises/{id} | DELETE | Delete an exercise.                    |
 
 ### Personal API
+
 The Personal API is used to perform personal workout operations like writing down workouts etc.
 
 Here is an overview of the available end points.
