@@ -11,7 +11,7 @@ import (
 const requestIDLength = 16
 
 // RequestID assigns a unique identifier to each incoming request.
-func RequestID(next http.HandlerFunc) http.Handler {
+func RequestID(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
 		ctx = context.WithValue(ctx, contextkey.RequestID, random.String(requestIDLength))

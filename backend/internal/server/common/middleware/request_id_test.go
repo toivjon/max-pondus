@@ -20,11 +20,11 @@ func TestRequestIDAddsRequestIDToContext(t *testing.T) {
 	expected := random.String(requestIDLength)
 	rand.Seed(0)
 
-	handler := RequestID(func(w http.ResponseWriter, r *http.Request) {
+	nextHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
 		assert.Equal(t, expected, ctx.Value(contextkey.RequestID))
 	})
-	testHandler(handler, context.Background())
+	testHandler(RequestID(nextHandler), context.Background())
 }
 
 func TestRequestIDOverridesOldRequestID(t *testing.T) {
@@ -32,13 +32,13 @@ func TestRequestIDOverridesOldRequestID(t *testing.T) {
 	expected := random.String(requestIDLength)
 	rand.Seed(0)
 
-	handler := RequestID(func(w http.ResponseWriter, r *http.Request) {
+	nextHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
 		assert.Equal(t, expected, ctx.Value(contextkey.RequestID))
 	})
 	ctx := context.Background()
 	ctx = context.WithValue(ctx, contextkey.RequestID, mockVal)
-	testHandler(handler, ctx)
+	testHandler(RequestID(nextHandler), ctx)
 }
 
 func TestRequestIDKeepsOldNonRelatedContent(t *testing.T) {
@@ -46,14 +46,14 @@ func TestRequestIDKeepsOldNonRelatedContent(t *testing.T) {
 	expected := random.String(requestIDLength)
 	rand.Seed(0)
 
-	handler := RequestID(func(w http.ResponseWriter, r *http.Request) {
+	handler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
 		assert.Equal(t, expected, ctx.Value(contextkey.RequestID))
 		assert.Equal(t, mockVal, ctx.Value(mockKey))
 	})
 	ctx := context.Background()
 	ctx = context.WithValue(ctx, mockKey, mockVal)
-	testHandler(handler, ctx)
+	testHandler(RequestID(handler), ctx)
 }
 
 func TestRequestIDIsDifferentOnConsecutiveCalls(t *testing.T) {
@@ -63,7 +63,7 @@ func TestRequestIDIsDifferentOnConsecutiveCalls(t *testing.T) {
 	rand.Seed(0)
 
 	calls := 0
-	handler := RequestID(func(w http.ResponseWriter, r *http.Request) {
+	nextHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
 		if calls == 0 {
 			assert.Equal(t, expected1, ctx.Value(contextkey.RequestID))
@@ -72,6 +72,7 @@ func TestRequestIDIsDifferentOnConsecutiveCalls(t *testing.T) {
 		}
 		calls++
 	})
+	handler := RequestID(nextHandler)
 	ctx := context.Background()
 	testHandler(handler, ctx)
 	testHandler(handler, ctx)
