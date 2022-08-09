@@ -6,7 +6,7 @@ import "testing"
 func Equal(t *testing.T, expected any, actual any) {
 	t.Helper()
 	if expected != actual {
-		t.Errorf("Expected %q but was %q", expected, actual)
+		t.Errorf("Expected %v but was %v", expected, actual)
 	}
 }
 
@@ -14,6 +14,6 @@ func Equal(t *testing.T, expected any, actual any) {
 func NotEqual(t *testing.T, lhs any, rhs any) {
 	t.Helper()
 	if lhs == rhs {
-		t.Errorf("Expected different values but were %q and %q", lhs, rhs)
+		t.Errorf("Expected different values but were %v and %v", lhs, rhs)
 	}
 }
