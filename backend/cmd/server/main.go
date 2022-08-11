@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/toivjon/max-pondus/backend/internal/server/admin"
+	"github.com/toivjon/max-pondus/backend/internal/server/common/middleware"
 	"github.com/toivjon/max-pondus/backend/internal/server/personal"
 )
 
@@ -21,6 +22,10 @@ func main() {
 	mux.Handle("/api/v1/admin", admin.NewHandler())
 	mux.Handle("/", http.NotFoundHandler())
 
+	handler := middleware.Logger(mux)
+	handler = middleware.RequestID(handler)
+	handler = http.TimeoutHandler(handler, *timeout, "")
+
 	server := &http.Server{
 		// Just use the default hostname and only specify the port we want to listen.
 		Addr: fmt.Sprintf(":%d", *port),
@@ -30,8 +35,8 @@ func main() {
 		ReadTimeout: time.Second,
 		// Reserve one second to request to establish a connection and us to read the headers.
 		ReadHeaderTimeout: time.Second,
-		// Use timeout handler to automatically abort the request handling if the processing timeouts.
-		Handler: http.TimeoutHandler(mux, *timeout, ""),
+		// Assign the root handler along with the middleware chain.
+		Handler: handler,
 	}
 	log.Printf("Starting a server port: %d timeout: %v", *port, *timeout)
 	log.Fatal(server.ListenAndServe())
