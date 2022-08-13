@@ -17,9 +17,17 @@ func main() {
 	timeout := flag.Duration("timeout", time.Second, "The timeout for processing the request.")
 	flag.Parse()
 
+	var personalHandler http.Handler
+	personalHandler = personal.NewHandler()
+	personalHandler = middleware.BasicAuth("personal", &personal.Authenticator{}, personalHandler)
+
+	var adminHandler http.Handler
+	adminHandler = admin.NewHandler()
+	adminHandler = middleware.BasicAuth("admin", &admin.Authenticator{}, adminHandler)
+
 	mux := http.NewServeMux()
-	mux.Handle("/api/v1/personal", personal.NewHandler())
-	mux.Handle("/api/v1/admin", admin.NewHandler())
+	mux.Handle("/api/v1/personal", personalHandler)
+	mux.Handle("/api/v1/admin", adminHandler)
 	mux.Handle("/", http.NotFoundHandler())
 
 	handler := middleware.Logger(mux)
