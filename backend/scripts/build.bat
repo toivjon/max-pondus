@@ -65,7 +65,7 @@ set coverage=0.0%
 for /f "tokens=3" %%i in ('go tool cover -func ./coverage.out') do set coverage=%%i
 call :percentage_string_gte %coverage% %coveragethreshold% coveragepassed
 if %coveragepassed% equ 0 (
-  echo Checking test coverage failed. Test coverage is too low.
+  echo Checking test coverage failed. Coverage %coverage% is less than %coveragethreshold%.
   exit /B 1
 )
 echo Running tests and checking coverage (threshold: %coveragethreshold%) passed.
