@@ -12,9 +12,6 @@ import (
 	"github.com/toivjon/max-pondus/backend/internal/server/common/random"
 )
 
-const mockVal = "mockVal"
-const mockKey = contextkey.ContextKey("mockKey")
-
 func TestRequestIDAddsRequestIDToContext(t *testing.T) {
 	rand.Seed(0)
 	expected := random.String(requestIDLength)
@@ -78,6 +75,9 @@ func TestRequestIDIsDifferentOnConsecutiveCalls(t *testing.T) {
 	testHandler(handler, ctx)
 	assert.Equal(t, 2, calls)
 }
+
+const mockVal = "mockVal"
+const mockKey = contextkey.ContextKey("mockKey")
 
 func testHandler(handler http.Handler, ctx context.Context) {
 	req := httptest.NewRequest(http.MethodGet, "http://testing", nil)
