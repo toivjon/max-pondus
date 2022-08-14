@@ -9,6 +9,20 @@ import (
 	"github.com/toivjon/max-pondus/backend/internal/server/common/assert"
 )
 
+func TestBasicAuthWithoutBasicAuthDefinition(t *testing.T) {
+	authenticator := &mockAuthenticator{Result: false}
+	nextHandler := new(mockHandler)
+	handler := BasicAuth(mockRealm, authenticator, nextHandler)
+
+	req := httptest.NewRequest(http.MethodGet, "http://testing", nil)
+	rr := httptest.NewRecorder()
+	handler.ServeHTTP(rr, req)
+
+	assert.Equal(t, 0, authenticator.CallCount)
+	assert.Equal(t, 0, nextHandler.CallCount)
+	assert.Equal(t, http.StatusUnauthorized, rr.Code)
+}
+
 func TestBasicAuthFailure(t *testing.T) {
 	authenticator := &mockAuthenticator{Result: false}
 	nextHandler := new(mockHandler)
