@@ -5,6 +5,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/toivjon/max-pondus/backend/internal/server/common"
 	"github.com/toivjon/max-pondus/backend/internal/server/common/assert"
 )
 
@@ -43,11 +44,12 @@ const mockUsername = "mockUsername"
 const mockPassword = "mockPassword"
 
 type mockAuthenticator struct {
-	CallCount int
-	Result    bool
+	CallCount  int
+	Result     bool
+	ResultUser common.User
 }
 
-func (m *mockAuthenticator) Authenticate(username, password string) bool {
+func (m *mockAuthenticator) Authenticate(username, password string) (bool, common.User) {
 	m.CallCount++
-	return m.Result
+	return m.Result, m.ResultUser
 }
