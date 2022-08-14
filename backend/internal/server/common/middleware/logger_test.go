@@ -14,21 +14,17 @@ import (
 	"github.com/toivjon/max-pondus/backend/internal/server/common/contextkey"
 )
 
-const mockRequestID = "mockRequestID"
-
-// TODO write unit tests for the responseWriterWrapper
-
 func TestLoggerWithNoCtxRequestID(t *testing.T) {
 	var buf bytes.Buffer
 	log.SetOutput(&buf)
-	defer func() {
-		log.SetOutput(os.Stderr)
-	}()
-	ctx := context.Background()
+	defer log.SetOutput(os.Stderr)
 	nextHandler := &mockHandler{StatusCode: http.StatusOK}
-	req := httptest.NewRequest(http.MethodGet, "http://testing", nil)
 	handler := Logger(nextHandler)
+
+	req := httptest.NewRequest(http.MethodGet, "http://testing", nil)
+	ctx := context.Background()
 	handler.ServeHTTP(httptest.NewRecorder(), req.WithContext(ctx))
+
 	assert.Equal(t, 1, nextHandler.CallCount)
 	assert.Match(t, fmt.Sprintf("%s %s %s - [0-9]+ in [0-9]+", "\\(<nil>\\)", http.MethodGet, "http://testing"), buf.String())
 }
@@ -36,18 +32,20 @@ func TestLoggerWithNoCtxRequestID(t *testing.T) {
 func TestLoggerWithRequestID(t *testing.T) {
 	var buf bytes.Buffer
 	log.SetOutput(&buf)
-	defer func() {
-		log.SetOutput(os.Stderr)
-	}()
+	defer log.SetOutput(os.Stderr)
+	nextHandler := &mockHandler{StatusCode: http.StatusOK}
+	handler := Logger(nextHandler)
+
+	req := httptest.NewRequest(http.MethodGet, "http://testing", nil)
 	ctx := context.Background()
 	ctx = context.WithValue(ctx, contextkey.RequestID, mockRequestID)
-	nextHandler := &mockHandler{StatusCode: http.StatusOK}
-	req := httptest.NewRequest(http.MethodGet, "http://testing", nil)
-	handler := Logger(nextHandler)
 	handler.ServeHTTP(httptest.NewRecorder(), req.WithContext(ctx))
+
 	assert.Equal(t, 1, nextHandler.CallCount)
 	assert.Match(t, fmt.Sprintf("%s %s %s - [0-9]+ in [0-9]+", mockRequestID, http.MethodGet, "http://testing"), buf.String())
 }
+
+const mockRequestID = "mockRequestID"
 
 type mockHandler struct {
 	StatusCode int
