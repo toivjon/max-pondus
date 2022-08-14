@@ -16,6 +16,8 @@ import (
 
 const mockRequestID = "mockRequestID"
 
+// TODO write unit tests for the responseWriterWrapper
+
 func TestLoggerWithNoCtxRequestID(t *testing.T) {
 	var buf bytes.Buffer
 	log.SetOutput(&buf)
@@ -23,7 +25,7 @@ func TestLoggerWithNoCtxRequestID(t *testing.T) {
 		log.SetOutput(os.Stderr)
 	}()
 	ctx := context.Background()
-	nextHandler := new(mockHandler)
+	nextHandler := &mockHandler{StatusCode: http.StatusOK}
 	req := httptest.NewRequest(http.MethodGet, "http://testing", nil)
 	handler := Logger(nextHandler)
 	handler.ServeHTTP(httptest.NewRecorder(), req.WithContext(ctx))
@@ -39,7 +41,7 @@ func TestLoggerWithRequestID(t *testing.T) {
 	}()
 	ctx := context.Background()
 	ctx = context.WithValue(ctx, contextkey.RequestID, mockRequestID)
-	nextHandler := new(mockHandler)
+	nextHandler := &mockHandler{StatusCode: http.StatusOK}
 	req := httptest.NewRequest(http.MethodGet, "http://testing", nil)
 	handler := Logger(nextHandler)
 	handler.ServeHTTP(httptest.NewRecorder(), req.WithContext(ctx))
@@ -48,9 +50,11 @@ func TestLoggerWithRequestID(t *testing.T) {
 }
 
 type mockHandler struct {
-	CallCount int
+	StatusCode int
+	CallCount  int
 }
 
 func (m *mockHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	m.CallCount++
+	w.WriteHeader(m.StatusCode)
 }

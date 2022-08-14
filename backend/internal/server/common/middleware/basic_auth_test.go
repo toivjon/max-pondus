@@ -25,7 +25,7 @@ func TestBasicAuthFailure(t *testing.T) {
 
 func TestBasicAuthSuccess(t *testing.T) {
 	authenticator := &mockAuthenticator{Result: true}
-	nextHandler := new(mockHandler)
+	nextHandler := &mockHandler{StatusCode: http.StatusOK}
 	handler := BasicAuth(mockRealm, authenticator, nextHandler)
 
 	req := httptest.NewRequest(http.MethodGet, "http://testing", nil)
