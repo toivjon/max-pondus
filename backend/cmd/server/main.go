@@ -30,9 +30,9 @@ func main() {
 	mux.Handle("/api/v1/admin", adminHandler)
 	mux.Handle("/", http.NotFoundHandler())
 
-	handler := middleware.Logger(mux)
+	handler := http.TimeoutHandler(mux, *timeout, "")
+	handler = middleware.Logger(handler)
 	handler = middleware.RequestID(handler)
-	handler = http.TimeoutHandler(handler, *timeout, "")
 
 	server := &http.Server{
 		// Just use the default hostname and only specify the port we want to listen.
