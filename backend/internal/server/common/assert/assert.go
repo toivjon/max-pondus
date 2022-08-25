@@ -1,6 +1,7 @@
 package assert
 
 import (
+	"reflect"
 	"regexp"
 	"testing"
 )
@@ -9,6 +10,14 @@ import (
 func Equal(t *testing.T, expected any, actual any) {
 	t.Helper()
 	if expected != actual {
+		t.Errorf("Expected %v but was %v", expected, actual)
+	}
+}
+
+// EqualSlice checks whether the given expected and actual contain same elements.
+func EqualSlice[T comparable](t *testing.T, expected []T, actual []T) {
+	t.Helper()
+	if !reflect.DeepEqual(actual, expected) {
 		t.Errorf("Expected %v but was %v", expected, actual)
 	}
 }
@@ -30,5 +39,21 @@ func Match(t *testing.T, pattern, value string) {
 	}
 	if !result {
 		t.Errorf("Expected pattern %q to match %q", pattern, value)
+	}
+}
+
+// Nil checks whether the given value is nil.
+func Nil(t *testing.T, value any) {
+	t.Helper()
+	if value == nil {
+		t.Errorf("Expected nil but was %v", value)
+	}
+}
+
+// Len checks whether the given slice has the given length.
+func Len[T any](t *testing.T, slice []T, expected int) {
+	t.Helper()
+	if len(slice) != expected {
+		t.Errorf("Expected slice to have length %d but was %d", expected, len(slice))
 	}
 }

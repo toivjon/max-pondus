@@ -31,6 +31,7 @@ func main() {
 	mux.Handle("/", http.NotFoundHandler())
 
 	handler := http.TimeoutHandler(mux, *timeout, "")
+	handler = middleware.Recoverer(handler)
 	handler = middleware.Logger(handler)
 	handler = middleware.RequestID(handler)
 
