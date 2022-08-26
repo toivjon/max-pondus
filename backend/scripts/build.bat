@@ -3,9 +3,6 @@
 setlocal enabledelayedexpansion
 echo Building MaX Pondus backend
 
-:: Make Go to install necessary packages globally.
-set GO111MODULE=off
-
 :: Resolve the absolute path of the project root from the script path.
 set rootpath=%~dp0%
 set rootpath=%rootpath:~0,-9%
@@ -28,27 +25,21 @@ echo    Cmd path        %cmdpath%
 echo    Go version      %goversion%
 echo    Go path         %GOPATH%
 
-:: -----------------------------
-:: Source code format validation
-:: -----------------------------
+:: ------------------------------
+:: Source code format and linting
+:: ------------------------------
 
-:: Install the goimports if not yet installed.
-if not exist %GOPATH%\bin\goimports.exe (
-  echo Installing goimports...
-  go get golang.org/x/tools/cmd/goimports || exit /B 1
-  echo Installing goimports completed.
+:: Install the golangci-lint if not yet installed.
+if not exist %GOPATH%\bin\golangci-lint.exe (
+  echo Installing golangci-lint...
+  go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.49.0 || exit /B 1
+  echo Installing golangci-lint completed.
 )
 
 :: Use goimports to check the format correctness.
-echo Validating code formatting...
+echo Linting and validating code...
 set lintresult=%rootpath%\lint.out
-goimports -e -d ./ > %lintresult% || exit /B 1
-findstr /m "+++" %lintresult% >nul
-if %errorlevel% neq 1 (
-  type %lintresult%
-  echo Validating code formatting failed.
-  exit /B 1
-)
+golangci-lint run || exit /B 1
 echo Validating code formatting passed.
 
 :: ----------------------------

@@ -1,0 +1,14 @@
+linters:
+  enable-all: true
+  disable:
+    - exhaustivestruct
+    - ifshort
+    - golint
+    - scopelint
+    - maligned
+    - interfacer
+    - contextcheck
+    - rowserrcheck
+    - sqlclosecheck
+    - structcheck
+    - wastedassign
