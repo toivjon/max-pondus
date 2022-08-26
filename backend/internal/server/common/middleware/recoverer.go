@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"errors"
 	"log"
 	"net/http"
 	"regexp"
@@ -16,7 +17,7 @@ func Recoverer(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		defer func() {
 			if rvr := recover(); rvr != nil {
-				if rvr == http.ErrAbortHandler {
+				if errors.Is(rvr.(error), http.ErrAbortHandler) {
 					panic(r)
 				}
 				stack := strings.Split(string(debug.Stack()), "\n")
