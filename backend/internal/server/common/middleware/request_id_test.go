@@ -21,7 +21,7 @@ func TestRequestIDAddsRequestIDToContext(t *testing.T) {
 		ctx := r.Context()
 		assert.Equal(t, expected, ctx.Value(contextkey.RequestID))
 	})
-	testHandler(RequestID(nextHandler), context.Background())
+	testHandler(context.Background(), RequestID(nextHandler))
 }
 
 func TestRequestIDOverridesOldRequestID(t *testing.T) {
@@ -35,7 +35,7 @@ func TestRequestIDOverridesOldRequestID(t *testing.T) {
 	})
 	ctx := context.Background()
 	ctx = context.WithValue(ctx, contextkey.RequestID, mockVal)
-	testHandler(RequestID(nextHandler), ctx)
+	testHandler(ctx, RequestID(nextHandler))
 }
 
 func TestRequestIDKeepsOldNonRelatedContent(t *testing.T) {
@@ -50,7 +50,7 @@ func TestRequestIDKeepsOldNonRelatedContent(t *testing.T) {
 	})
 	ctx := context.Background()
 	ctx = context.WithValue(ctx, mockKey, mockVal)
-	testHandler(RequestID(handler), ctx)
+	testHandler(ctx, RequestID(handler))
 }
 
 func TestRequestIDIsDifferentOnConsecutiveCalls(t *testing.T) {
@@ -71,15 +71,15 @@ func TestRequestIDIsDifferentOnConsecutiveCalls(t *testing.T) {
 	})
 	handler := RequestID(nextHandler)
 	ctx := context.Background()
-	testHandler(handler, ctx)
-	testHandler(handler, ctx)
+	testHandler(ctx, handler)
+	testHandler(ctx, handler)
 	assert.Equal(t, 2, calls)
 }
 
 const mockVal = "mockVal"
 const mockKey = contextkey.ContextKey("mockKey")
 
-func testHandler(handler http.Handler, ctx context.Context) {
+func testHandler(ctx context.Context, handler http.Handler) {
 	req := httptest.NewRequest(http.MethodGet, "http://testing", nil)
 	handler.ServeHTTP(httptest.NewRecorder(), req.WithContext(ctx))
 }
