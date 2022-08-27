@@ -2,7 +2,6 @@ package middleware_test
 
 import (
 	"context"
-	"math/rand"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -10,46 +9,36 @@ import (
 	"github.com/toivjon/max-pondus/backend/internal/server/common/assert"
 	"github.com/toivjon/max-pondus/backend/internal/server/common/contextkey"
 	"github.com/toivjon/max-pondus/backend/internal/server/common/middleware"
-	"github.com/toivjon/max-pondus/backend/internal/server/common/random"
 )
 
-//nolint:paralleltest
 func TestRequestIDAddsRequestIDToContext(t *testing.T) {
-	rand.Seed(0)
-	expected := random.String(middleware.RequestIDLength)
-	rand.Seed(0)
-
+	t.Parallel()
 	nextHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
-		assert.Equal(t, expected, ctx.Value(contextkey.RequestID))
+		reqID := getRequestID(ctx)
+		assert.Equal(t, middleware.RequestIDLength, len(reqID))
 	})
 	testHandler(context.Background(), middleware.RequestID(nextHandler))
 }
 
-//nolint:paralleltest
 func TestRequestIDOverridesOldRequestID(t *testing.T) {
-	rand.Seed(0)
-	expected := random.String(middleware.RequestIDLength)
-	rand.Seed(0)
-
+	t.Parallel()
 	nextHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
-		assert.Equal(t, expected, ctx.Value(contextkey.RequestID))
+		reqID := getRequestID(ctx)
+		assert.Equal(t, middleware.RequestIDLength, len(reqID))
 	})
 	ctx := context.Background()
 	ctx = context.WithValue(ctx, contextkey.RequestID, mockVal)
 	testHandler(ctx, middleware.RequestID(nextHandler))
 }
 
-//nolint:paralleltest
 func TestRequestIDKeepsOldNonRelatedContent(t *testing.T) {
-	rand.Seed(0)
-	expected := random.String(middleware.RequestIDLength)
-	rand.Seed(0)
-
+	t.Parallel()
 	handler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
-		assert.Equal(t, expected, ctx.Value(contextkey.RequestID))
+		reqID := getRequestID(ctx)
+		assert.Equal(t, middleware.RequestIDLength, len(reqID))
 		assert.Equal(t, mockVal, ctx.Value(mockKey))
 	})
 	ctx := context.Background()
@@ -57,34 +46,35 @@ func TestRequestIDKeepsOldNonRelatedContent(t *testing.T) {
 	testHandler(ctx, middleware.RequestID(handler))
 }
 
-//nolint:paralleltest
 func TestRequestIDIsDifferentOnConsecutiveCalls(t *testing.T) {
-	rand.Seed(0)
-	expected1 := random.String(middleware.RequestIDLength)
-	expected2 := random.String(middleware.RequestIDLength)
-	rand.Seed(0)
-
-	calls := 0
+	t.Parallel()
+	reqIDs := make(map[string]bool)
 	nextHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
-		if calls == 0 {
-			assert.Equal(t, expected1, ctx.Value(contextkey.RequestID))
-		} else {
-			assert.Equal(t, expected2, ctx.Value(contextkey.RequestID))
-		}
-		calls++
+		reqID := getRequestID(ctx)
+		reqIDs[reqID] = true
 	})
 	handler := middleware.RequestID(nextHandler)
 	ctx := context.Background()
-	testHandler(ctx, handler)
-	testHandler(ctx, handler)
-	assert.Equal(t, 2, calls)
+	const callCount = 2
+	for i := 0; i < callCount; i++ {
+		testHandler(ctx, handler)
+	}
+	assert.Equal(t, callCount, len(reqIDs))
 }
 
 const (
 	mockVal = "mockVal"
 	mockKey = contextkey.ContextKey("mockKey")
 )
+
+func getRequestID(ctx context.Context) string {
+	reqID, ok := ctx.Value(contextkey.RequestID).(string)
+	if !ok {
+		panic("Context RequestID is not a string!")
+	}
+	return reqID
+}
 
 func testHandler(ctx context.Context, handler http.Handler) {
 	req := httptest.NewRequest(http.MethodGet, "http://testing", nil)
