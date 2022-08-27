@@ -7,8 +7,6 @@ import (
 	"github.com/toivjon/max-pondus/backend/internal/server/common"
 )
 
-// TODO Inject database connection and get user from there?
-
 type Authenticator struct{}
 
 func (s *Authenticator) Authenticate(username, password string) (bool, common.User) {
@@ -23,5 +21,5 @@ func (s *Authenticator) Authenticate(username, password string) (bool, common.Us
 			Username: username,
 		}
 	}
-	return false, common.User{}
+	return false, common.User{Username: ""}
 }

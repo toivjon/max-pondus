@@ -13,6 +13,7 @@ import (
 )
 
 func main() {
+	//nolint:gomnd
 	port := flag.Int("port", 8080, "The port to listen for the incoming HTTP connections.")
 	timeout := flag.Duration("timeout", time.Second, "The timeout for processing the request.")
 	flag.Parse()
@@ -35,6 +36,7 @@ func main() {
 	handler = middleware.Logger(handler)
 	handler = middleware.RequestID(handler)
 
+	//nolint:exhaustruct
 	server := &http.Server{
 		// Just use the default hostname and only specify the port we want to listen.
 		Addr: fmt.Sprintf(":%d", *port),

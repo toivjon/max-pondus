@@ -1,4 +1,4 @@
-package middleware
+package middleware_test
 
 import (
 	"net/http"
@@ -7,12 +7,14 @@ import (
 
 	"github.com/toivjon/max-pondus/backend/internal/server/common"
 	"github.com/toivjon/max-pondus/backend/internal/server/common/assert"
+	"github.com/toivjon/max-pondus/backend/internal/server/common/middleware"
 )
 
 func TestBasicAuthWithoutBasicAuthDefinition(t *testing.T) {
-	authenticator := &mockAuthenticator{Result: false}
+	t.Parallel()
+	authenticator := &mockAuthenticator{CallCount: 0, Result: false, ResultUser: common.User{Username: ""}}
 	nextHandler := new(mockHandler)
-	handler := BasicAuth(mockRealm, authenticator, nextHandler)
+	handler := middleware.BasicAuth(mockRealm, authenticator, nextHandler)
 
 	req := httptest.NewRequest(http.MethodGet, "http://testing", nil)
 	rr := httptest.NewRecorder()
@@ -24,9 +26,10 @@ func TestBasicAuthWithoutBasicAuthDefinition(t *testing.T) {
 }
 
 func TestBasicAuthFailure(t *testing.T) {
-	authenticator := &mockAuthenticator{Result: false}
+	t.Parallel()
+	authenticator := &mockAuthenticator{CallCount: 0, Result: false, ResultUser: common.User{Username: ""}}
 	nextHandler := new(mockHandler)
-	handler := BasicAuth(mockRealm, authenticator, nextHandler)
+	handler := middleware.BasicAuth(mockRealm, authenticator, nextHandler)
 
 	req := httptest.NewRequest(http.MethodGet, "http://testing", nil)
 	req.SetBasicAuth(mockUsername, mockPassword)
@@ -39,9 +42,10 @@ func TestBasicAuthFailure(t *testing.T) {
 }
 
 func TestBasicAuthSuccess(t *testing.T) {
-	authenticator := &mockAuthenticator{Result: true}
-	nextHandler := &mockHandler{StatusCode: http.StatusOK}
-	handler := BasicAuth(mockRealm, authenticator, nextHandler)
+	t.Parallel()
+	authenticator := &mockAuthenticator{CallCount: 0, Result: true, ResultUser: common.User{Username: ""}}
+	nextHandler := &mockHandler{StatusCode: http.StatusOK, CallCount: 0}
+	handler := middleware.BasicAuth(mockRealm, authenticator, nextHandler)
 
 	req := httptest.NewRequest(http.MethodGet, "http://testing", nil)
 	req.SetBasicAuth(mockUsername, mockPassword)
@@ -53,9 +57,11 @@ func TestBasicAuthSuccess(t *testing.T) {
 	assert.Equal(t, http.StatusOK, rr.Code)
 }
 
-const mockRealm = "mockRealm"
-const mockUsername = "mockUsername"
-const mockPassword = "mockPassword"
+const (
+	mockRealm    = "mockRealm"
+	mockUsername = "mockUsername"
+	mockPassword = "mockPassword"
+)
 
 type mockAuthenticator struct {
 	CallCount  int

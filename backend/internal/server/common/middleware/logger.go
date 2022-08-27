@@ -10,15 +10,15 @@ import (
 
 // Logger logs the request-response information after the request has been handled.
 func Logger(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 		start := time.Now()
-		wrapper := &responseWriterWrapper{ResponseWriter: w}
+		wrapper := &responseWriterWrapper{ResponseWriter: res, statusCode: 0}
 		defer func() {
 			duration := time.Since(start)
-			reqID := r.Context().Value(contextkey.RequestID)
-			log.Printf("%s %s %s - %d in %s", reqID, r.Method, r.URL, wrapper.statusCode, duration)
+			reqID := req.Context().Value(contextkey.RequestID)
+			log.Printf("%s %s %s - %d in %s", reqID, req.Method, req.URL, wrapper.statusCode, duration)
 		}()
-		next.ServeHTTP(wrapper, r)
+		next.ServeHTTP(wrapper, req)
 	})
 }
 

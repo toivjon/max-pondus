@@ -19,5 +19,5 @@ func (h *Handler) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	reqCtx := ctx.Request.Context()
 	user := reqCtx.Value(contextkey.User)
 	responseText := fmt.Sprintf("TODO Personal: Hello %+v", user)
-	ctx.WriteResponse(200, struct{ Text string }{Text: responseText})
+	ctx.WriteResponse(http.StatusOK, struct{ Text string }{Text: responseText})
 }

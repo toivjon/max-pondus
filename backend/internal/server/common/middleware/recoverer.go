@@ -14,11 +14,11 @@ import (
 
 // Recoverer handles graceful logging and handling of panics.
 func Recoverer(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 		defer func() {
 			if rvr := recover(); rvr != nil {
-				if errors.Is(rvr.(error), http.ErrAbortHandler) {
-					panic(r)
+				if err, ok := rvr.(error); ok && errors.Is(err, http.ErrAbortHandler) {
+					panic(err)
 				}
 				stack := strings.Split(string(debug.Stack()), "\n")
 				lines := []string{}
@@ -38,11 +38,11 @@ func Recoverer(next http.Handler) http.Handler {
 						lines[i] = "    " + match
 					}
 				}
-				reqID := r.Context().Value(contextkey.RequestID)
+				reqID := req.Context().Value(contextkey.RequestID)
 				log.Printf("%s panic: %s\n%s", reqID, rvr, strings.Join(lines, "\n"))
-				w.WriteHeader(http.StatusInternalServerError)
+				res.WriteHeader(http.StatusInternalServerError)
 			}
 		}()
-		next.ServeHTTP(w, r)
+		next.ServeHTTP(res, req)
 	})
 }

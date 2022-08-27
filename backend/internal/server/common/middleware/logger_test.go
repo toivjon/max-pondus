@@ -1,4 +1,4 @@
-package middleware
+package middleware_test
 
 import (
 	"bytes"
@@ -12,29 +12,37 @@ import (
 
 	"github.com/toivjon/max-pondus/backend/internal/server/common/assert"
 	"github.com/toivjon/max-pondus/backend/internal/server/common/contextkey"
+	"github.com/toivjon/max-pondus/backend/internal/server/common/middleware"
 )
 
+//nolint:paralleltest
 func TestLoggerWithNoCtxRequestID(t *testing.T) {
 	var buf bytes.Buffer
 	log.SetOutput(&buf)
 	defer log.SetOutput(os.Stderr)
-	nextHandler := &mockHandler{StatusCode: http.StatusOK}
-	handler := Logger(nextHandler)
+	nextHandler := &mockHandler{StatusCode: http.StatusOK, CallCount: 0}
+	handler := middleware.Logger(nextHandler)
 
 	req := httptest.NewRequest(http.MethodGet, "http://testing", nil)
 	ctx := context.Background()
 	handler.ServeHTTP(httptest.NewRecorder(), req.WithContext(ctx))
 
 	assert.Equal(t, 1, nextHandler.CallCount)
-	assert.Match(t, fmt.Sprintf("%s %s %s - [0-9]+ in [0-9]+", "\\(<nil>\\)", http.MethodGet, "http://testing"), buf.String())
+	assert.Match(t, fmt.Sprintf(
+		"%s %s %s - [0-9]+ in [0-9]+",
+		"\\(<nil>\\)",
+		http.MethodGet,
+		"http://testing",
+	), buf.String())
 }
 
+//nolint:paralleltest
 func TestLoggerWithRequestID(t *testing.T) {
 	var buf bytes.Buffer
 	log.SetOutput(&buf)
 	defer log.SetOutput(os.Stderr)
-	nextHandler := &mockHandler{StatusCode: http.StatusOK}
-	handler := Logger(nextHandler)
+	nextHandler := &mockHandler{StatusCode: http.StatusOK, CallCount: 0}
+	handler := middleware.Logger(nextHandler)
 
 	req := httptest.NewRequest(http.MethodGet, "http://testing", nil)
 	ctx := context.Background()
@@ -42,7 +50,12 @@ func TestLoggerWithRequestID(t *testing.T) {
 	handler.ServeHTTP(httptest.NewRecorder(), req.WithContext(ctx))
 
 	assert.Equal(t, 1, nextHandler.CallCount)
-	assert.Match(t, fmt.Sprintf("%s %s %s - [0-9]+ in [0-9]+", mockRequestID, http.MethodGet, "http://testing"), buf.String())
+	assert.Match(t, fmt.Sprintf(
+		"%s %s %s - [0-9]+ in [0-9]+",
+		mockRequestID,
+		http.MethodGet,
+		"http://testing",
+	), buf.String())
 }
 
 const mockRequestID = "mockRequestID"

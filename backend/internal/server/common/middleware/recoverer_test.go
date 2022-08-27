@@ -1,4 +1,4 @@
-package middleware
+package middleware_test
 
 import (
 	"bytes"
@@ -13,14 +13,16 @@ import (
 
 	"github.com/toivjon/max-pondus/backend/internal/server/common/assert"
 	"github.com/toivjon/max-pondus/backend/internal/server/common/contextkey"
+	"github.com/toivjon/max-pondus/backend/internal/server/common/middleware"
 )
 
+//nolint:paralleltest
 func TestRecovererPanicsWithErrAbortHandler(t *testing.T) {
 	var buf bytes.Buffer
 	log.SetOutput(&buf)
 	defer log.SetOutput(os.Stderr)
-	nextHandler := &mockPanicHandler{Err: http.ErrAbortHandler}
-	handler := Recoverer(nextHandler)
+	nextHandler := &mockPanicHandler{Err: http.ErrAbortHandler, CallCount: 0}
+	handler := middleware.Recoverer(nextHandler)
 	defer func() {
 		panicCount := 0
 		if rvr := recover(); rvr != nil {
@@ -38,12 +40,13 @@ func TestRecovererPanicsWithErrAbortHandler(t *testing.T) {
 	t.Error("Should panic and therefore should not reach this line!")
 }
 
+//nolint:paralleltest
 func TestRecovererRecoversFromNonErrAbortHandler(t *testing.T) {
 	var buf bytes.Buffer
 	log.SetOutput(&buf)
 	defer log.SetOutput(os.Stderr)
-	nextHandler := &mockPanicHandler{Err: errMock}
-	handler := Recoverer(nextHandler)
+	nextHandler := &mockPanicHandler{Err: errMock, CallCount: 0}
+	handler := middleware.Recoverer(nextHandler)
 
 	req := httptest.NewRequest(http.MethodGet, "http://testing", nil)
 	ctx := context.Background()

@@ -15,5 +15,7 @@ type Context struct {
 func (c *Context) WriteResponse(statusCode int, dto interface{}) {
 	c.ResponseWriter.Header().Set("Content-Type", "application/json")
 	c.WriteHeader(statusCode)
-	json.NewEncoder(c.ResponseWriter).Encode(dto)
+	if err := json.NewEncoder(c.ResponseWriter).Encode(dto); err != nil {
+		panic(err)
+	}
 }
