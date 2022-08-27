@@ -2,7 +2,6 @@ package middleware
 
 import (
 	"errors"
-	"log"
 	"net/http"
 	"regexp"
 	"runtime/debug"
@@ -12,8 +11,11 @@ import (
 	"github.com/toivjon/max-pondus/backend/internal/server/common/sort"
 )
 
+// RecovererPrintf is used to write a new log entry into the application log.
+type RecovererPrintf func(string, ...any)
+
 // Recoverer handles graceful logging and handling of panics.
-func Recoverer(next http.Handler) http.Handler {
+func Recoverer(recovererPrintf RecovererPrintf, next http.Handler) http.Handler {
 	return http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 		defer func() {
 			if rvr := recover(); rvr != nil {
@@ -39,7 +41,7 @@ func Recoverer(next http.Handler) http.Handler {
 					}
 				}
 				reqID := req.Context().Value(contextkey.RequestID)
-				log.Printf("%s panic: %s\n%s", reqID, rvr, strings.Join(lines, "\n"))
+				recovererPrintf("%s panic: %s\n%s", reqID, rvr, strings.Join(lines, "\n"))
 				res.WriteHeader(http.StatusInternalServerError)
 			}
 		}()

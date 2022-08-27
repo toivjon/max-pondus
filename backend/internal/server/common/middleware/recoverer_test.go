@@ -1,14 +1,11 @@
 package middleware_test
 
 import (
-	"bytes"
 	"context"
 	"errors"
 	"fmt"
-	"log"
 	"net/http"
 	"net/http/httptest"
-	"os"
 	"testing"
 
 	"github.com/toivjon/max-pondus/backend/internal/server/common/assert"
@@ -16,13 +13,13 @@ import (
 	"github.com/toivjon/max-pondus/backend/internal/server/common/middleware"
 )
 
-//nolint:paralleltest
 func TestRecovererPanicsWithErrAbortHandler(t *testing.T) {
-	var buf bytes.Buffer
-	log.SetOutput(&buf)
-	defer log.SetOutput(os.Stderr)
+	t.Parallel()
+	result := ""
 	nextHandler := &mockPanicHandler{Err: http.ErrAbortHandler, CallCount: 0}
-	handler := middleware.Recoverer(nextHandler)
+	handler := middleware.Recoverer(func(format string, args ...any) {
+		result = fmt.Sprintf(format, args...)
+	}, nextHandler)
 	defer func() {
 		panicCount := 0
 		if rvr := recover(); rvr != nil {
@@ -30,7 +27,7 @@ func TestRecovererPanicsWithErrAbortHandler(t *testing.T) {
 		}
 		assert.Equal(t, 1, nextHandler.CallCount)
 		assert.Equal(t, 1, panicCount)
-		assert.Equal(t, "", buf.String())
+		assert.Equal(t, "", result)
 	}()
 
 	req := httptest.NewRequest(http.MethodGet, "http://testing", nil)
@@ -40,13 +37,13 @@ func TestRecovererPanicsWithErrAbortHandler(t *testing.T) {
 	t.Error("Should panic and therefore should not reach this line!")
 }
 
-//nolint:paralleltest
 func TestRecovererRecoversFromNonErrAbortHandler(t *testing.T) {
-	var buf bytes.Buffer
-	log.SetOutput(&buf)
-	defer log.SetOutput(os.Stderr)
+	t.Parallel()
+	result := ""
 	nextHandler := &mockPanicHandler{Err: errMock, CallCount: 0}
-	handler := middleware.Recoverer(nextHandler)
+	handler := middleware.Recoverer(func(format string, args ...any) {
+		result = fmt.Sprintf(format, args...)
+	}, nextHandler)
 
 	req := httptest.NewRequest(http.MethodGet, "http://testing", nil)
 	ctx := context.Background()
@@ -54,7 +51,7 @@ func TestRecovererRecoversFromNonErrAbortHandler(t *testing.T) {
 	handler.ServeHTTP(httptest.NewRecorder(), req.WithContext(ctx))
 
 	assert.Equal(t, 1, nextHandler.CallCount)
-	assert.Match(t, fmt.Sprintf("%s panic: %s", mockRequestID, errMock), buf.String())
+	assert.Match(t, fmt.Sprintf("%s panic: %s", mockRequestID, errMock), result)
 }
 
 var errMock = errors.New("mockError")

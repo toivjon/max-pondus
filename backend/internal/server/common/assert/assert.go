@@ -7,7 +7,7 @@ import (
 )
 
 // Equal checks whether the given expected and actual values are equal.
-func Equal(t *testing.T, expected any, actual any) {
+func Equal[T comparable](t *testing.T, expected T, actual T) {
 	t.Helper()
 	if expected != actual {
 		t.Errorf("Expected %v but was %v", expected, actual)

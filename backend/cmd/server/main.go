@@ -12,9 +12,10 @@ import (
 	"github.com/toivjon/max-pondus/backend/internal/server/personal"
 )
 
+const defaultPort = 8080
+
 func main() {
-	//nolint:gomnd
-	port := flag.Int("port", 8080, "The port to listen for the incoming HTTP connections.")
+	port := flag.Int("port", defaultPort, "The port to listen for the incoming HTTP connections.")
 	timeout := flag.Duration("timeout", time.Second, "The timeout for processing the request.")
 	flag.Parse()
 
@@ -32,11 +33,10 @@ func main() {
 	mux.Handle("/", http.NotFoundHandler())
 
 	handler := http.TimeoutHandler(mux, *timeout, "")
-	handler = middleware.Recoverer(handler)
-	handler = middleware.Logger(handler)
+	handler = middleware.Recoverer(log.Printf, handler)
+	handler = middleware.Logger(log.Printf, handler)
 	handler = middleware.RequestID(handler)
 
-	//nolint:exhaustruct
 	server := &http.Server{
 		// Just use the default hostname and only specify the port we want to listen.
 		Addr: fmt.Sprintf(":%d", *port),
@@ -48,6 +48,22 @@ func main() {
 		ReadHeaderTimeout: time.Second,
 		// Assign the root handler along with the middleware chain.
 		Handler: handler,
+		// Tell server to use ReadTimeout value as the timeout value for keep-alive connections.
+		IdleTimeout: 0,
+		// Use the default maximum amount of bytes for headers.
+		MaxHeaderBytes: http.DefaultMaxHeaderBytes,
+		// Explicitly specify TLS to nil to keep linter happy.
+		TLSConfig: nil,
+		// Explicitly specify TLS to nil to keep linter happy.
+		TLSNextProto: nil,
+		// Explicitly specify that we do not need an additional observer for the connection state changes.
+		ConnState: nil,
+		// Specify server to use standard logger for connection errors.
+		ErrorLog: nil,
+		// Specify server to use the default context as the base context for all requests.
+		BaseContext: nil,
+		// Tell server to use the default behaviour for the connection context.
+		ConnContext: nil,
 	}
 	log.Printf("Starting a server port: %d timeout: %v", *port, *timeout)
 	log.Fatal(server.ListenAndServe())

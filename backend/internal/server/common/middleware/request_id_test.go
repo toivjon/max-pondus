@@ -38,8 +38,12 @@ func TestRequestIDKeepsOldNonRelatedContent(t *testing.T) {
 	handler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
 		reqID := getRequestID(ctx)
+		otherVal, ok := ctx.Value(mockKey).(string)
+		if !ok {
+			panic("mockKey is not a string!")
+		}
 		assert.Equal(t, middleware.RequestIDLength, len(reqID))
-		assert.Equal(t, mockVal, ctx.Value(mockKey))
+		assert.Equal(t, mockVal, otherVal)
 	})
 	ctx := context.Background()
 	ctx = context.WithValue(ctx, mockKey, mockVal)
