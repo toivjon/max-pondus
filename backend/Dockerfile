@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM golang:1.17.1-alpine
+FROM golang:1.18.5-alpine
 
 # Create a directory for the application.
 WORKDIR /maxpondus
