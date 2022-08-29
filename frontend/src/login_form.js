@@ -1,7 +1,7 @@
 import React from "react";
 
 class LoginForm extends React.Component {
-  
+
   handleSubmit(event) {
     const username = event.target.username.value;
     const password = event.target.password.value;
@@ -13,7 +13,7 @@ class LoginForm extends React.Component {
       <form className="login-form" onSubmit={this.handleSubmit}>
           <input name="username" type="email"  placeholder="User Email" />
           <br />
-          <input name="password" type="password" placeholder="Password" />
+          <input name="password" type="password" placeholder="Password" autoComplete="on" />
           <br />
           <button className="primary">Login</button>
       </form>
