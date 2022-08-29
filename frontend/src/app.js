@@ -1,21 +1,14 @@
 import React, { Component} from "react";
+import "./login_form"
 import "./app.css";
+import LoginForm from "./login_form";
 
 class App extends Component{
   render(){
     return(
       <div className="App">
-        <form className="form">
-          <div className="inputGroup">
-            <label htmlFor="email">Email</label>
-            <input type="email" name="email" placeholder="name@email.com"></input>
-          </div>
-          <div className="inputGroup">
-            <label htmlFor="password">Password</label>
-            <input type="password" name="password"></input>
-          </div>
-          <button className="primary">Login</button>
-        </form>
+        <h1>Sign In</h1>
+        <LoginForm />
       </div>
     );
   }
