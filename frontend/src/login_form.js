@@ -11,11 +11,11 @@ class LoginForm extends React.Component {
   render() {
     return(
       <form className="login-form" onSubmit={this.handleSubmit}>
-          <input name="username" type="email"  placeholder="User Email" />
-          <br />
-          <input name="password" type="password" placeholder="Password" autoComplete="on" />
-          <br />
-          <button className="primary">Login</button>
+        <input name="username" type="email"  placeholder="User Email" />
+        <br />
+        <input name="password" type="password" placeholder="Password" autoComplete="on" />
+        <br />
+        <button className="primary">Login</button>
       </form>
     )
   }
