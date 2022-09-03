@@ -15,13 +15,16 @@ class LoginForm extends React.Component {
 
   render() {
     return(
-      <form className="login-form" onSubmit={this.handleSubmit}>
-        <label htmlFor="username">Username</label>
-        <input id="username" name="username" type="email"  placeholder="User Email" />
-        <label htmlFor="password">Password</label>
-        <input id="password" name="password" type="password" placeholder="Password" autoComplete="on" />
-        <input name="submit" type="submit" value="Login" />
-      </form>
+      <div>
+        <h1>Sign In</h1>
+        <form className="login-form" onSubmit={this.handleSubmit}>
+          <label htmlFor="username">Username</label>
+          <input id="username" name="username" type="email"  placeholder="User Email" />
+          <label htmlFor="password">Password</label>
+          <input id="password" name="password" type="password" placeholder="Password" autoComplete="on" />
+          <input name="submit" type="submit" value="Login" />
+        </form>
+      </div>
     )
   }
 }
