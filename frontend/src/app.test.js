@@ -1,9 +1,9 @@
-import App from "./app.js";
 import React from 'react';
 import TestRenderer from 'react-test-renderer';
+import App from './app.js';
 
-test('test that Jest works', () => {
+test('App root div has correct props', () => {
   const content = TestRenderer.create(<App />);
-  const heading = content.root.findByType('h1');
-  expect(heading.children[0]).toBe('Hello, World!');
+  const root = content.root.findByType('div');
+  expect(root.props['className']).toBe("App");
 });
