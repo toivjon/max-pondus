@@ -1,32 +1,44 @@
-import React from "react";
+import React from 'react';
+import Button from 'react-bootstrap/Button';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Form from 'react-bootstrap/Form';
 
-class LoginForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+export default function LoginForm() {
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
 
-  handleSubmit(event) {
-    const username = event.target.username.value;
-    const password = event.target.password.value;
-    console.log("Login username=" + username + " password=" + password);
+  function submit(event) {
+    // TODO Implement the logic required for the authentication.
+    console.log("username: " + username + " password: " + password);
     event.preventDefault();
   }
 
-  render() {
-    return(
-      <div>
-        <h1>Sign In</h1>
-        <form className="login-form" onSubmit={this.handleSubmit}>
-          <label htmlFor="username">Username</label>
-          <input id="username" name="username" type="email"  placeholder="User Email" />
-          <label htmlFor="password">Password</label>
-          <input id="password" name="password" type="password" placeholder="Password" autoComplete="on" />
-          <input name="submit" type="submit" value="Login" />
-        </form>
-      </div>
-    )
+  function validate() {
+    return username.length > 0 && password.length > 0;
   }
-}
 
-export default LoginForm;
+  return(
+    <Form onSubmit={submit} id="login-form">
+      <Form.Group className="mb-3">
+        <FloatingLabel className="mb-3" controlId="email" label="Username">
+          <Form.Control
+            autoFocus
+            type="email"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </FloatingLabel>
+      </Form.Group>
+      <Form.Group className="mb-3">
+        <FloatingLabel className="mb-3" controlId="password" label="Password">
+          <Form.Control
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </FloatingLabel>
+      </Form.Group>
+      <Button variant="primary" type="submit" block="true" disabled={!validate()}>Login</Button>
+    </Form>
+  )
+}
