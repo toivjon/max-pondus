@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client'
-import App from './app.js';
+import App from './app';
 
 // Build and render the React application root structure.
 const rootElement = document.getElementById("root");
