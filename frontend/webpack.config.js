@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin")
 
 module.exports = {
   mode: "development",
@@ -32,6 +33,7 @@ module.exports = {
     new HtmlWebPackPlugin({
       template: "public/index.html",
       favicon: "public/favicon.png"
-    })
+    }),
+    new ReactRefreshWebpackPlugin(),
   ],
 };

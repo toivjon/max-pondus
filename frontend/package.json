@@ -45,5 +45,9 @@
         "statements": 95
       }
     }
+  },
+  "devDependencies": {
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",
+    "react-refresh": "^0.14.0"
   }
 }
