@@ -26,6 +26,7 @@ export default function LoginForm() {
             type="email"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            autoComplete="username"
           />
         </FloatingLabel>
       </Form.Group>
@@ -35,6 +36,7 @@ export default function LoginForm() {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            autoComplete="current-password"
           />
         </FloatingLabel>
       </Form.Group>
