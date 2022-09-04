@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const { SourceMapDevToolPlugin } = require("webpack");
 
 module.exports = {
   mode: "development",
@@ -27,10 +28,14 @@ module.exports = {
     open: true,
     hot: true
   },
+  devtool: false,
   plugins: [
     new HtmlWebPackPlugin({
       template: "public/index.html",
       favicon: "public/favicon.png"
     }),
+    new SourceMapDevToolPlugin({
+      filename: "[name].js.map",
+    })
   ],
 };
