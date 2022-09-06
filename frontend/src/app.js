@@ -10,12 +10,11 @@ import ProgramsLayout from './layouts/programs_layout';
 export default function App() {
   return(
     <Routes>
-      <Route path="/" element={<RootLayout />}>
-        <Route path="home" element={<HomeLayout />}/>
-        <Route path="exercises" element={<ExercisesLayout />}/>
-        <Route path="programs" element={<ProgramsLayout />}/>
-        <Route path="login" element={<LoginForm />}/>
-        <Route path="*" element={<p>nothing!</p>}/>
+      <Route path="/" element={<RootLayout/>}>
+        <Route index element={<HomeLayout/>}/>
+        <Route path="exercises" element={<ExercisesLayout/>}/>
+        <Route path="programs" element={<ProgramsLayout/>}/>
+        <Route path="login" element={<LoginForm/>}/>
       </Route>
     </Routes>
   );

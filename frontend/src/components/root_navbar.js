@@ -7,8 +7,8 @@ export default function RootNavbar() {
   return (
     <Navbar bg="light" className="p-2">
       <Navbar.Brand>MaX Pondus</Navbar.Brand>
-      <Nav defaultActiveKey="/home">
-        <LinkContainer to="/home">
+      <Nav defaultActiveKey="/">
+        <LinkContainer to="/">
           <Nav.Link>Home</Nav.Link>
         </LinkContainer>
         <LinkContainer to="/exercises">
