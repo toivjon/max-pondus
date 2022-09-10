@@ -11,8 +11,8 @@ export default function RootNavbar() {
         <LinkContainer to="/">
           <Nav.Link>Home</Nav.Link>
         </LinkContainer>
-        <LinkContainer to="/exercises">
-          <Nav.Link>Exercises</Nav.Link>
+        <LinkContainer to="/workouts">
+          <Nav.Link>Workouts</Nav.Link>
         </LinkContainer>
         <LinkContainer to="/programs">
           <Nav.Link>Programs</Nav.Link>
