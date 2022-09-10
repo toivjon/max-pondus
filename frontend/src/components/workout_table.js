@@ -8,7 +8,6 @@ export default function WorkoutTable() {
     time: "09:30",
     duration: "1 hour 30 min",
     notes: "Foo seems to be bar here?"
-
   };
   return (
     <Table>
