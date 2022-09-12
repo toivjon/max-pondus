@@ -5,7 +5,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 // The root navigation bar for the application.
 export default function RootNavbar() {
   return (
-    <Navbar bg="light" className="p-2">
+    <Navbar bg="dark" variant="dark" className="p-2">
       <Navbar.Brand>MaX Pondus</Navbar.Brand>
       <Nav defaultActiveKey="/">
         <LinkContainer to="/">
