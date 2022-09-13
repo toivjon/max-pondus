@@ -8,6 +8,7 @@ export default function WorkoutTableItem({workout}) {
   const timeOptions = { hour: "2-digit", minute: "2-digit"};
   return (
     <tr>
+      <td>{workout.id}</td>
       <td>{workout.start.toLocaleDateString(undefined, dateOptions)}</td>
       <td>{workout.start.toLocaleTimeString(undefined, timeOptions)}</td>
       <td>{workout.end - workout.start}</td>
