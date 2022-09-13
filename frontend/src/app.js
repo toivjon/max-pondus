@@ -1,10 +1,10 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import LoginForm from './login_form';
-import RootLayout from './layouts/root_layout';
-import HomeLayout from './layouts/home_layout';
-import WorkoutsLayout from './layouts/workouts_layout';
-import ProgramsLayout from './layouts/programs_layout';
+import RootLayout from './layouts/root';
+import HomeLayout from './layouts/home';
+import WorkoutsLayout from './layouts/workouts';
+import ProgramsLayout from './layouts/programs';
 
 // The application main entry point which builds the whole UI structure.
 export default function App() {
