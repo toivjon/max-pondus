@@ -1,8 +1,11 @@
 export default class Workout {
   constructor() {
-    this.date = "10.09.2022";
-    this.time = "09:30";
-    this.duration = "1 hour 30 min";
+    this.id = 313;
+    this.programId = "";
+    this.start = new Date();
+    this.end = new Date();
+    this.end.setHours(this.start.getHours()+1);
     this.notes = "Foo seems to be bar here?";
+    this.sets = [];
   }
 }
