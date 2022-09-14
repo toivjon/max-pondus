@@ -2,11 +2,17 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import PropTypes from 'prop-types';
 
 // TODO Build a new workout instance and assign it as a state.
 // TODO Replace placeholders with the values from the workout state.
 
 export default function FreeformWorkoutModal(props) {
+  const onSave = () => {
+    // TODO Execute the actual saving of the form contents.
+    props.onHide();
+  }
   return (
     <Modal {...props} fullscreen>
       <Modal.Header>
@@ -26,6 +32,13 @@ export default function FreeformWorkoutModal(props) {
           </InputGroup>
         </Form>
       </Modal.Body>
+      <Modal.Footer>
+        <Button onClick={onSave}>Save</Button>
+      </Modal.Footer>
     </Modal>
   );
+}
+
+FreeformWorkoutModal.propTypes = {
+  onHide: PropTypes.func.isRequired
 }
