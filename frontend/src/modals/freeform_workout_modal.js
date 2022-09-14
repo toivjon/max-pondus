@@ -6,11 +6,11 @@ import Modal from 'react-bootstrap/Modal';
 // TODO Build a new workout instance and assign it as a state.
 // TODO Replace placeholders with the values from the workout state.
 
-export default function FreeformExerciseModal(props) {
+export default function FreeformWorkoutModal(props) {
   return (
     <Modal {...props} fullscreen>
       <Modal.Header>
-        <Modal.Title>Freeform Exercise</Modal.Title>
+        <Modal.Title>Freeform Workout</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>

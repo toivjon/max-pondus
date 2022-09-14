@@ -1,11 +1,11 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 
-export default function ProgramExerciseModal(props) {
+export default function ProgramWorkoutModal(props) {
   return (
     <Modal {...props} fullscreen>
       <Modal.Header>
-        <Modal.Title>Program Exercise</Modal.Title>
+        <Modal.Title>Program Workout</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         Hello Program!
