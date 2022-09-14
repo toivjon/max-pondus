@@ -13,6 +13,10 @@ export default function FreeformWorkoutModal(props) {
     // TODO Execute the actual saving of the form contents.
     props.onHide();
   }
+  const onAddExercise = () => {
+    // TODO Add the selected exercise to the exercises table.
+    // TODO Activate the selected exercise.
+  }
   return (
     <Modal {...props} fullscreen>
       <Modal.Header>
@@ -29,6 +33,15 @@ export default function FreeformWorkoutModal(props) {
             <Form.Control type="time" value={"09:10"}/>
             <InputGroup.Text>End</InputGroup.Text>
             <Form.Control type="time" value={"10:10"}/>
+          </InputGroup>
+          <InputGroup className='p-2'>
+            <Form.Select>
+              <option>Select an exercise</option>
+              <option>Foo</option>
+              <option>Bar</option>
+              <option>Baz</option>
+            </Form.Select>
+            <Button onClick={onAddExercise}>Add Exercise</Button>
           </InputGroup>
         </Form>
       </Modal.Body>
