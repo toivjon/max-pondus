@@ -43,6 +43,8 @@ export default function FreeformWorkoutModal(props) {
             </Form.Select>
             <Button onClick={onAddExercise}>Add Exercise</Button>
           </InputGroup>
+          <Form.Label>Notes</Form.Label>
+          <Form.Control as="textarea" rows={3} value={"Foobar"}/>
         </Form>
       </Modal.Body>
       <Modal.Footer>
