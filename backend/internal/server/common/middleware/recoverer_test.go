@@ -61,7 +61,7 @@ type mockPanicHandler struct {
 	CallCount int
 }
 
-func (m *mockPanicHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+func (m *mockPanicHandler) ServeHTTP(_ http.ResponseWriter, _ *http.Request) {
 	m.CallCount++
 	panic(m.Err)
 }

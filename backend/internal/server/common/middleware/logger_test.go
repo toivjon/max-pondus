@@ -52,7 +52,7 @@ type mockHandler struct {
 	CallCount  int
 }
 
-func (m *mockHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+func (m *mockHandler) ServeHTTP(w http.ResponseWriter, _ *http.Request) {
 	m.CallCount++
 	w.WriteHeader(m.StatusCode)
 }

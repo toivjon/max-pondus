@@ -69,7 +69,7 @@ type mockAuthenticator struct {
 	ResultUser common.User
 }
 
-func (m *mockAuthenticator) Authenticate(username, password string) (bool, common.User) {
+func (m *mockAuthenticator) Authenticate(_, _ string) (bool, common.User) {
 	m.CallCount++
 	return m.Result, m.ResultUser
 }

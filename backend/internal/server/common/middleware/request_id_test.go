@@ -13,7 +13,7 @@ import (
 
 func TestRequestIDAddsRequestIDToContext(t *testing.T) {
 	t.Parallel()
-	nextHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	nextHandler := http.HandlerFunc(func(_ http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
 		reqID := getRequestID(ctx)
 		assert.Equal(t, middleware.RequestIDLength, len(reqID))
@@ -23,7 +23,7 @@ func TestRequestIDAddsRequestIDToContext(t *testing.T) {
 
 func TestRequestIDOverridesOldRequestID(t *testing.T) {
 	t.Parallel()
-	nextHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	nextHandler := http.HandlerFunc(func(_ http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
 		reqID := getRequestID(ctx)
 		assert.Equal(t, middleware.RequestIDLength, len(reqID))
@@ -35,7 +35,7 @@ func TestRequestIDOverridesOldRequestID(t *testing.T) {
 
 func TestRequestIDKeepsOldNonRelatedContent(t *testing.T) {
 	t.Parallel()
-	handler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	handler := http.HandlerFunc(func(_ http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
 		reqID := getRequestID(ctx)
 		otherVal, ok := ctx.Value(mockKey).(string)
@@ -53,7 +53,7 @@ func TestRequestIDKeepsOldNonRelatedContent(t *testing.T) {
 func TestRequestIDIsDifferentOnConsecutiveCalls(t *testing.T) {
 	t.Parallel()
 	reqIDs := make(map[string]bool)
-	nextHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	nextHandler := http.HandlerFunc(func(_ http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
 		reqID := getRequestID(ctx)
 		reqIDs[reqID] = true
