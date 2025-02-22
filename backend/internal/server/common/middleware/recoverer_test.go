@@ -31,7 +31,7 @@ func TestRecovererPanicsWithErrAbortHandler(t *testing.T) {
 	}()
 
 	req := httptest.NewRequest(http.MethodGet, "http://testing", nil)
-	ctx := context.Background()
+	ctx := t.Context()
 	handler.ServeHTTP(httptest.NewRecorder(), req.WithContext(ctx))
 
 	t.Error("Should panic and therefore should not reach this line!")
@@ -46,7 +46,7 @@ func TestRecovererRecoversFromNonErrAbortHandler(t *testing.T) {
 	}, nextHandler)
 
 	req := httptest.NewRequest(http.MethodGet, "http://testing", nil)
-	ctx := context.Background()
+	ctx := t.Context()
 	ctx = context.WithValue(ctx, contextkey.RequestID, mockRequestID)
 	handler.ServeHTTP(httptest.NewRecorder(), req.WithContext(ctx))
 

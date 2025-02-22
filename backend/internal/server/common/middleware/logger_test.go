@@ -21,7 +21,7 @@ func TestLoggerWithNoCtxRequestID(t *testing.T) {
 	}, nextHandler)
 
 	req := httptest.NewRequest(http.MethodGet, "http://testing", nil)
-	ctx := context.Background()
+	ctx := t.Context()
 	handler.ServeHTTP(httptest.NewRecorder(), req.WithContext(ctx))
 
 	assert.Equal(t, 1, nextHandler.CallCount)
@@ -37,7 +37,7 @@ func TestLoggerWithRequestID(t *testing.T) {
 	}, nextHandler)
 
 	req := httptest.NewRequest(http.MethodGet, "http://testing", nil)
-	ctx := context.Background()
+	ctx := t.Context()
 	ctx = context.WithValue(ctx, contextkey.RequestID, mockRequestID)
 	handler.ServeHTTP(httptest.NewRecorder(), req.WithContext(ctx))
 

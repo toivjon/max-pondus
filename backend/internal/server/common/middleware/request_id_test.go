@@ -18,7 +18,7 @@ func TestRequestIDAddsRequestIDToContext(t *testing.T) {
 		reqID := getRequestID(ctx)
 		assert.Equal(t, middleware.RequestIDLength, len(reqID))
 	})
-	testHandler(context.Background(), middleware.RequestID(nextHandler))
+	testHandler(t.Context(), middleware.RequestID(nextHandler))
 }
 
 func TestRequestIDOverridesOldRequestID(t *testing.T) {
@@ -28,7 +28,7 @@ func TestRequestIDOverridesOldRequestID(t *testing.T) {
 		reqID := getRequestID(ctx)
 		assert.Equal(t, middleware.RequestIDLength, len(reqID))
 	})
-	ctx := context.Background()
+	ctx := t.Context()
 	ctx = context.WithValue(ctx, contextkey.RequestID, mockVal)
 	testHandler(ctx, middleware.RequestID(nextHandler))
 }
@@ -45,7 +45,7 @@ func TestRequestIDKeepsOldNonRelatedContent(t *testing.T) {
 		assert.Equal(t, middleware.RequestIDLength, len(reqID))
 		assert.Equal(t, mockVal, otherVal)
 	})
-	ctx := context.Background()
+	ctx := t.Context()
 	ctx = context.WithValue(ctx, mockKey, mockVal)
 	testHandler(ctx, middleware.RequestID(handler))
 }
@@ -59,7 +59,7 @@ func TestRequestIDIsDifferentOnConsecutiveCalls(t *testing.T) {
 		reqIDs[reqID] = true
 	})
 	handler := middleware.RequestID(nextHandler)
-	ctx := context.Background()
+	ctx := t.Context()
 	const callCount = 2
 	for range callCount {
 		testHandler(ctx, handler)
