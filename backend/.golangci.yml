@@ -2,20 +2,7 @@ linters:
   enable-all: true
   disable:
     # deprecated linters
-    - exhaustivestruct
-    - ifshort
-    - golint
-    - scopelint
-    - maligned
-    - interfacer
-    - structcheck
-    - deadcode
-    - nosnakecase
-    - varcheck
-    # non-1.18 supported linters
-    - wastedassign
-    - sqlclosecheck
-    - rowserrcheck
+    - tenv
     # unwanted linters
     - nlreturn
     - wsl

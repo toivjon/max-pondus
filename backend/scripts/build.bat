@@ -32,7 +32,7 @@ echo    Go path         %GOPATH%
 :: Install the golangci-lint if not yet installed.
 if not exist %GOPATH%\bin\golangci-lint.exe (
   echo Installing golangci-lint...
-  go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.49.0 || exit /B 1
+  go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.64.5 || exit /B 1
   echo Installing golangci-lint completed.
 )
 
