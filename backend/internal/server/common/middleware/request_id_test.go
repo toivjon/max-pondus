@@ -61,7 +61,7 @@ func TestRequestIDIsDifferentOnConsecutiveCalls(t *testing.T) {
 	handler := middleware.RequestID(nextHandler)
 	ctx := context.Background()
 	const callCount = 2
-	for i := 0; i < callCount; i++ {
+	for range callCount {
 		testHandler(ctx, handler)
 	}
 	assert.Equal(t, callCount, len(reqIDs))
