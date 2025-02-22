@@ -64,6 +64,8 @@ func main() {
 		BaseContext: nil,
 		// Tell server to use the default behaviour for the connection context.
 		ConnContext: nil,
+		// Tell server to just accept OPTIONS * requests with a default handler.
+		DisableGeneralOptionsHandler: false,
 	}
 	log.Printf("Starting a server port: %d timeout: %v", *port, *timeout)
 	log.Fatal(server.ListenAndServe())
