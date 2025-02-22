@@ -66,6 +66,10 @@ func main() {
 		ConnContext: nil,
 		// Tell server to just accept OPTIONS * requests with a default handler.
 		DisableGeneralOptionsHandler: false,
+		// This is here just to keep linter happy. Field does not have any effect.
+		HTTP2: nil,
+		// Allow default protocols to be used.
+		Protocols: nil,
 	}
 	log.Printf("Starting a server port: %d timeout: %v", *port, *timeout)
 	log.Fatal(server.ListenAndServe())
