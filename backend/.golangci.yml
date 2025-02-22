@@ -4,5 +4,6 @@ linters:
     # deprecated linters
     - tenv
     # unwanted linters
+    - depguard
     - nlreturn
     - wsl
