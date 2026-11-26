@@ -90,7 +90,7 @@ Display names and descriptions are localized by the frontend.
 - Exercises may be performed without additional weight.
 - Subset timestamps are optional. When both are provided, endedAt must not precede startedAt.
 - A continuous isometric hold counts as one repetition.
-- Exercise duration is derived from startedAt and endedAt.
+- A Subset's duration is calculated as the difference between endedAt and startedAt when both timestamps are available.
 
 ### Identifier Stability
 
