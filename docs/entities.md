@@ -55,6 +55,16 @@ erDiagram
 | User         | An identifiable user of the application.                                        |
 | Workout      | An individual training session.                                                 |
 
+## Reference Data
+
+Exercises, Muscles and Muscle Groups are predefined domain concepts identified by stable, language-independent codes.
+
+Their allowed values and relationships are defined in [shared/exercises.json](../shared/exercises.json).
+
+The catalog serves as the single source of truth for these definitions.
+
+Display names and descriptions are localized by the frontend.
+
 ## Business Rules
 
 ### Workout
@@ -76,3 +86,7 @@ erDiagram
 - Weight and repetition count cannot be negative.
 - Exercises may be performed without additional weight.
 - Subset timestamps are optional. When both are provided, endedAt must not precede startedAt.
+
+### Identifier Stability
+
+- Published identifiers must not be changed or reused, as they may be referenced by recorded Workouts.
