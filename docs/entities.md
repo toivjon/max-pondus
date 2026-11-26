@@ -51,7 +51,7 @@ erDiagram
 | Muscle       | A specific muscle involved in performing exercises.                                  |
 | Muscle Group | A category of related muscles (e.g. Chest).                                          |
 | Set          | A logical grouping of exercise repetition sets performed as a single training round. |
-| Subset       | A recorded sequence of repetitions of a single exercise.                             |
+| Subset       | A recorded performance or attempt of a single exercise.                              |
 | User         | An identifiable user of the application.                                             |
 | Workout      | An individual training session.                                                      |
 
