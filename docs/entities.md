@@ -45,15 +45,15 @@ erDiagram
 
 ## Entities
 
-| Entity       | Description                                                                     |
-| ------------ | ------------------------------------------------------------------------------- |
-| Exercise     | A defined physical movement performed during training (e.g. Dumbbell Row).      |
-| Muscle       | A specific muscle involved in performing exercises.                             |
-| Muscle Group | A category of related muscles (e.g. Chest).                                     |
-| Set          | A logical training unit that can represent a normal set, superset, or drop set. |
-| Subset       | A recorded set of repetitions of a single exercise.                             |
-| User         | An identifiable user of the application.                                        |
-| Workout      | An individual training session.                                                 |
+| Entity       | Description                                                                          |
+| ------------ | ------------------------------------------------------------------------------------ |
+| Exercise     | A defined physical movement performed during training (e.g. Dumbbell Row).           |
+| Muscle       | A specific muscle involved in performing exercises.                                  |
+| Muscle Group | A category of related muscles (e.g. Chest).                                          |
+| Set          | A logical grouping of exercise repetition sets performed as a single training round. |
+| Subset       | A recorded sequence of repetitions of a single exercise.                             |
+| User         | An identifiable user of the application.                                             |
+| Workout      | An individual training session.                                                      |
 
 ## Reference Data
 
@@ -77,7 +77,10 @@ Display names and descriptions are localized by the frontend.
 
 ### Set
 
-- Subsets within a Set are ordered by their start times, when available.
+- A Set represents a single training round containing explicitly grouped Subsets.
+- A multi-round superset consists of multiple Sets, each containing the Subsets performed during that round.
+- Each Set independently defines its Subsets, regardless of the composition of other Sets in the Workout.
+- Subsets within a Set are ordered by their start times, when available. Timestamps do not determine Set membership.
 - Subsets within the same Set may reference the same or different Exercises.
 - Subsets within the same Set may have different weights and repetition counts.
 
@@ -90,3 +93,4 @@ Display names and descriptions are localized by the frontend.
 ### Identifier Stability
 
 - Published identifiers must not be changed or reused, as they may be referenced by recorded Workouts.
+- Identifiers referenced by recorded Workouts must remain resolvable.
