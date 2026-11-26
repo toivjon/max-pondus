@@ -14,7 +14,7 @@ The domain model is technology-independent. It describes business concepts rathe
 erDiagram
   USER         ||--o{ WORKOUT  : "owns"
   WORKOUT      ||--o{ SET      : "contains"
-  SET          ||--o{ SUBSET   : "contains"
+  SET          ||--|{ SUBSET   : "contains"
   MUSCLE-GROUP ||--o{ MUSCLE   : "contains"
   MUSCLE       }o--o{ EXERCISE : "associated with" 
   EXERCISE     ||--o{ SUBSET   : "referenced by"
@@ -89,6 +89,8 @@ Display names and descriptions are localized by the frontend.
 - Weight and repetition count cannot be negative.
 - Exercises may be performed without additional weight.
 - Subset timestamps are optional. When both are provided, endedAt must not precede startedAt.
+- A continuous isometric hold counts as one repetition.
+- Exercise duration is derived from startedAt and endedAt.
 
 ### Identifier Stability
 
