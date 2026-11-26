@@ -18,37 +18,61 @@ erDiagram
   MUSCLE-GROUP ||--o{ MUSCLE   : "contains"
   MUSCLE       }o--o{ EXERCISE : "associated with" 
   EXERCISE     ||--o{ SUBSET   : "referenced by"
+
+  USER {
+    string id
+  }
+
+  WORKOUT {
+    uuid     id
+    datetime startedAt
+    datetime endedAt
+  }
+
+  SET {
+    uuid id
+  }
+
+  SUBSET {
+    uuid       id
+    datetime   startedAt
+    datetime   endedAt
+    uint       repetitions
+    uint       weight
+    WeightUnit weightUnit
+  }
 ```
 
 ## Entities
 
-| Entity       | Description                                                                            |
-| ------------ | -------------------------------------------------------------------------------------- |
-| Exercise     | A defined physical movement performed during training (e.g. Dumbbell Row).             |
-| Muscle       | A specific muscle involved in performing exercises.                                    |
-| Muscle Group | A category of related muscles (e.g. Chest).                                            |
-| Set          | A logical training unit that can represent a normal set, superset, or drop set.        |
-| Subset       | A planned or performed set of repetitions of a single exercise.                        |
-| User         | An identifiable user of the application.                                               |
-| Workout      | An individual training session.                                                        |
+| Entity       | Description                                                                     |
+| ------------ | ------------------------------------------------------------------------------- |
+| Exercise     | A defined physical movement performed during training (e.g. Dumbbell Row).      |
+| Muscle       | A specific muscle involved in performing exercises.                             |
+| Muscle Group | A category of related muscles (e.g. Chest).                                     |
+| Set          | A logical training unit that can represent a normal set, superset, or drop set. |
+| Subset       | A recorded set of repetitions of a single exercise.                             |
+| User         | An identifiable user of the application.                                        |
+| Workout      | An individual training session.                                                 |
 
 ## Business Rules
 
 ### Workout
 
+- A Workout must have a start time, but its end time is optional.
+- When provided, endedAt must not precede startedAt.
 - Workouts can be saved without being completed.
 - Recorded Workouts can be modified afterwards.
-- Sets within a Workout have a defined order.
+- Sets within a Workout are ordered by the earliest available Subset start time, when available.
 
 ### Set
 
-- Subsets within a Set have a defined order.
+- Subsets within a Set are ordered by their start times, when available.
 - Subsets within the same Set may reference the same or different Exercises.
 - Subsets within the same Set may have different weights and repetition counts.
 
 ### Subset
 
-- A Subset may represent a planned or performed exercise set.
-- Planned Subsets do not require actual performance data.
 - Weight and repetition count cannot be negative.
 - Exercises may be performed without additional weight.
+- Subset timestamps are optional. When both are provided, endedAt must not precede startedAt.
