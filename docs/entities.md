@@ -38,7 +38,7 @@ erDiagram
     datetime   startedAt
     datetime   endedAt
     uint       repetitions
-    uint       weight
+    uint32     weight
     WeightUnit weightUnit
   }
 ```
@@ -96,3 +96,9 @@ Display names and descriptions are localized by the frontend.
 
 - Published identifiers must not be changed or reused, as they may be referenced by recorded Workouts.
 - Identifiers referenced by recorded Workouts must remain resolvable.
+
+### Weight
+
+- Weight represents the external load used during an exercise, excluding the user's body weight.
+- Weight is stored as an unsigned integer representing one-thousandth of the specified WeightUnit.
+- Supported weight units are KG (kilograms) and LB (pounds).
