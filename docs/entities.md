@@ -99,6 +99,9 @@ Display names and descriptions are localized by the frontend.
 
 ### Weight
 
-- Weight represents the external load used during an exercise, excluding the user's body weight.
-- Weight is stored as an unsigned integer representing one-thousandth of the specified WeightUnit.
-- Supported weight units are KG (kilograms) and LB (pounds).
+- Weight represents the external load per weight unit, excluding the user's body weight.
+- Weight is stored as an unsigned 32-bit integer representing one-thousandth of the specified WeightUnit.
+- Supported weight units are kilograms (KG) and pounds (LB).
+- Each Exercise defines a weightMultiplier in the shared exercise catalog.
+- Total recorded external load is calculated as weight multiplied by weightMultiplier.
+- Published weight multipliers must remain stable to preserve the meaning of historical records.
