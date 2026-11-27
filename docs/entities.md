@@ -45,15 +45,15 @@ erDiagram
 
 ## Entities
 
-| Entity       | Description                                                                          |
-| ------------ | ------------------------------------------------------------------------------------ |
-| Exercise     | A defined physical movement performed during training (e.g. Dumbbell Row).           |
-| Muscle       | A specific muscle involved in performing exercises.                                  |
-| Muscle Group | A category of related muscles (e.g. Chest).                                          |
-| Set          | A logical grouping of exercise repetition sets performed as a single training round. |
-| Subset       | A recorded performance or attempt of a single exercise.                              |
-| User         | An identifiable user of the application.                                             |
-| Workout      | An individual training session.                                                      |
+| Entity       | Description                                                                                                             |
+| ------------ | ----------------------------------------------------------------------------------------------------------------------- |
+| Exercise     | A defined physical movement or execution variation performed during training (e.g. single-arm dumbbell row, left side). |
+| Muscle       | A specific muscle involved in performing exercises.                                                                     |
+| Muscle Group | A category of related muscles (e.g. Chest).                                                                             |
+| Set          | A logical grouping of exercise repetition sets performed as a single training round.                                    |
+| Subset       | A recorded performance or attempt of a single exercise.                                                                 |
+| User         | An identifiable user of the application.                                                                                |
+| Workout      | An individual training session.                                                                                         |
 
 ## Reference Data
 
@@ -64,6 +64,10 @@ Their allowed values and relationships are defined in [shared/exercises.json](..
 The catalog serves as the single source of truth for these definitions.
 
 Display names and descriptions are localized by the frontend.
+
+Each Subset references a concrete Exercise identifier. Left-side, right-side and both-side variations are distinct Exercises where applicable.
+
+Related Exercise variations may share common catalog definitions, such as muscles and weightMultiplier.
 
 ## Business Rules
 
@@ -99,9 +103,10 @@ Display names and descriptions are localized by the frontend.
 
 ### Weight
 
-- Weight represents the external load per weight unit, excluding the user's body weight.
+- Weight represents the mass of one external load, excluding the user's body weight.
 - Weight is stored as an unsigned 32-bit integer representing one-thousandth of the specified WeightUnit.
 - Supported weight units are kilograms (KG) and pounds (LB).
-- Each Exercise defines a weightMultiplier in the shared exercise catalog.
+- Each Exercise defines a positive integer weightMultiplier in the shared exercise catalog.
 - Total recorded external load is calculated as weight multiplied by weightMultiplier.
 - Published weight multipliers must remain stable to preserve the meaning of historical records.
+- For a barbell, weight includes the bar and plates; for two equally weighted dumbbells, weight is the mass of one dumbbell.
